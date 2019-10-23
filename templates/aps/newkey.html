@@ -1,4 +1,3 @@
-
 {% extends "aps/base.html" %}
 {% block body_block %}
 
@@ -10,38 +9,24 @@
       </p>
     </h3>
 
-    <form  >
+    <form method="post" action="{% url 'aps:create_key_submit' %}">
       {% csrf_token %}
               
         <div class="form-group row">
-          <label class="form-label col-md-3" for="username">ID Master Key</label>
+          <label class="form-label col-md-3" for="IDMaster">ID Master Key</label>
             <div class="col-md-9">
-              <input readonly type="text" name="IDMaster"
-                maxlength="255"
-                class="form-control form-control-sm"
-                 title="" required=""
-                id="IDMaster" value =  >
+              <input type="text" name="IDMaster" maxlength="255"  class="form-control form-control-sm" 
+              title="" required="" id="IDMaster" value =  >
             </div>
         </div>
 
         <div class="form-group row">
           <label class="form-label col-md-3" for="encrypttype">Encryption Type</label>
             <div class="col-md-9">
-              <select class="form-control" id="encrypttype">
+              <select class="form-control" id="encrypttype" name="encrypttype">
                 <option value ="RSA">RSA</option>
                 <option value ="ECDCA">Elliptic Curve DSA</option>
                 <option value ="DSA">Digital Signature Algorithm</option>
-              </select>
-            </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="form-label col-md-3" name = "bit" for="bit">Type Bit</label>
-            <div class="col-md-9">
-              <select class="form-control" name ="bit" id="bit">
-                <option value="1024">1024</option>
-                <option value = "2048">2048</option>
-                <option value = "2048">2048</option>
               </select>
             </div>
         </div>
@@ -56,6 +41,37 @@
             </div>
           </div>
         </div>
+
+        </form>
+
+        <form  method="post" action="{% url 'aps:key_submit' %}">
+          {% csrf_token %}
+            <div class="form-group row">
+              <label class="form-label col-md-3" for="public">Public Key</label>
+                <div class="col-md-9">
+                <textarea readonly type="text" name="public" maxlength="255"  class="form-control form-control-sm" 
+                title="" required="" id="public"> {{ hasil }}</textarea> 
+              </div>
+          </div>
+            <div class="form-group row">
+              <label class="form-label col-md-3" for="private">Private Key</label>
+                <div class="col-md-9">
+                <textarea readonly type="text" name="private" maxlength="255"  class="form-control form-control-sm" 
+                title="" required="" id="private" > </textarea>
+              </div>
+          </div>
+
+        <div class="row">
+          <div class="col-12 text-center">
+            <div class="form-group">
+              <button type="submit" class="btn btn-secondary btn-block" >
+              SAVE
+              </button>
+            </div>
+          </div>
+        </div>
+
+        </form>
 
         <p></p>
 </div>

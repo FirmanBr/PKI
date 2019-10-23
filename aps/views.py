@@ -23,6 +23,27 @@ def create_key(request):
     return render(request, 'aps/newkey.html')    
 
 @login_required
+def create_key_submit(request):
+    if request.method == 'POST':
+        encrypttype = request.POST.get('encrypttype')
+        context= {
+            'hasil': encrypttype,
+        }
+        return render(request, 'aps/newkey.html',context)
+    else :   
+        pyautogui.alert('Failed')
+        return render(request, 'aps/newkey.html')
+      
+@login_required
+def key_submit(request):
+    if request.method == 'POST':
+        pyautogui.alert('berhasil')
+        return render(request, 'aps/newkey.html')
+    else :   
+        pyautogui.alert('gagal')
+        return render(request, 'aps/newkey.html')      
+
+@login_required
 def master_key(request):
     return render(request, 'aps/masterkey.html') 
 

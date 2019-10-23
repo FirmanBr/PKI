@@ -8,6 +8,8 @@ urlpatterns=[
     url(r'^user_login/$',views.user_login,name='user_login'),
     url(r'^master_key_submit/$',views.master_key_submit,name='master_key_submit'),
     url(r'^create_key/$',views.create_key,name='create_key'),
+    url(r'^create_key_submit/$',views.create_key_submit,name='create_key_submit'),
+    url(r'^key_submit/$',views.key_submit,name='key_submit'),
     url(r'^master_key/$',views.master_key,name='master_key'),
 ]
 
