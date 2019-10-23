@@ -1,0 +1,50 @@
+{% extends 'aps/base.html' %}
+{% block body_block %}
+
+  <div class="container">
+    <div class="jumbotron">
+      <h3 align="center">Login  </h3>
+
+      <div>
+      </div>
+
+      <form method="post" action="{% url 'aps:user_login' %}">
+        {% csrf_token %}
+
+        <div class="form-group row">
+          <label class="form-label col-md-3" for="username">Username</label>
+            <div class="col-md-9">
+              <input type="text" name="username"
+                maxlength="255"
+                class="form-control form-control-sm"
+                placeholder="Username" title="" required=""
+                id="username">
+            </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="form-label col-md-3" for="password">Password</label>
+            <div class="col-md-9">
+              <input type="password" name="password"
+                maxlength="255"
+                class="form-control form-control-sm"
+                placeholder="Password" title="" required=""
+                id="password">
+            </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 text-center">
+            <div class="form-group">
+              <button type="submit" class="form-button btn btn-success btn pull-right" >
+              LOGIN
+              </button>
+            </div>
+          </div>
+        </div>
+        
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

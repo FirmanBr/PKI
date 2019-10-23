@@ -1,0 +1,20 @@
+
+{% extends "aps/base.html" %}
+{% block body_block %}
+<div class="container">
+  <div class="jumbotron">
+    <h3>
+      <p align ="center">
+        Public Key Infrastructure
+      </p>
+    </h3>
+
+    {% if user.is_authenticated %}
+        <h3>Hello {{ user.username }}</h3>
+    {% else %}
+
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+

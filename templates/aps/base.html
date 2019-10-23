@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>PKI</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>    
+      <style>
+        .bs-example{
+	        margin: 20px;
+        }
+        @media screen and (min-width: 768px) {
+          .dropdown:hover .dropdown-menu, .btn-group:hover .dropdown-menu{
+		        display: block;
+	        }
+	        .dropdown-menu{
+		        margin-top: 0;
+	        }
+	        .dropdown-toggle{
+		        margin-bottom: 2px;
+	        }
+	        .navbar .dropdown-toggle, .nav-tabs .dropdown-toggle{
+		        margin-bottom: 0;
+	        }
+        }
+</style>
+
+</head>
+  <body>
+
+  
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <ul class="nav navbar-nav">
+
+          <li><a class="navbar-link" href="{% url 'index' %}">Home</a></li>
+          <li><a class="navbar-link" href="{% url 'aps:about' %}">About US</a></li>    
+          <li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li> 
+
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'aps:master_key' %}">Master Key</a></li>
+          {% endif %}
+
+          {% if user.is_authenticated %}
+            <li class="dropdown">
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle">Pair Key <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="{% url 'aps:create_key' %}">Create</a></li>
+                  <li><a href="#">List</a></li>
+                </ul>
+            </li>
+          {% endif %}
+
+          {% if user.is_authenticated %}
+            <li><a href="#">Revocation</a></li>
+          {% endif %}
+
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+          {% else %}
+            <li><a class="navbar-link" href="{% url 'aps:user_login' %}">Login</a></li>
+          {% endif %}
+
+        </ul>
+      
+      </div>
+    </nav>
+
+    <div class="container">
+      {% block body_block %}
+      {% endblock %}
+    </div>
+    
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
