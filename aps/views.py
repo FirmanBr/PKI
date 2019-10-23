@@ -25,8 +25,6 @@ def create_key(request):
 def create_key_submit(request):
     if request.method == 'POST':
 
- 
-
         encrypttype = request.POST.get('encrypttype')
         if encrypttype == 'RSA3072':
        
@@ -37,7 +35,8 @@ def create_key_submit(request):
             kuncipub1 = keyPair.exportKey()
 
         elif encrypttype =='ECDSA':
-            pass    
+            kuncipub = 'ecdsa'
+            kuncipub1 = 'ecdsa1'   
 
         else :
             kuncipub = 'dll'
