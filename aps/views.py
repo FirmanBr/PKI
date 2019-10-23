@@ -3,17 +3,16 @@ from aps.forms import UserForm,UserProfileInfoForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
+from datetime import datetime
+from cryptography.fernet import Fernet
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import PKCS1_OAEP
 
 import pyautogui
-
 import mysql.connector
-
-from datetime import datetime
-
-from cryptography.fernet import Fernet
+import binascii
 
 def index(request):
     return render(request,'aps/index.html')
@@ -25,9 +24,28 @@ def create_key(request):
 @login_required
 def create_key_submit(request):
     if request.method == 'POST':
+
+ 
+
         encrypttype = request.POST.get('encrypttype')
+        if encrypttype == 'RSA3072':
+       
+            keyPair = RSA.generate(3072)
+            pubKey = keyPair.publickey()
+
+            kuncipub = pubKey.exportKey()
+            kuncipub1 = keyPair.exportKey()
+
+        elif encrypttype =='ECDSA':
+            pass    
+
+        else :
+            kuncipub = 'dll'
+            kuncipub1 = 'dll1'
+            
         context= {
-            'hasil': encrypttype,
+            'public': kuncipub,
+            'private':kuncipub1,
         }
         return render(request, 'aps/newkey.html',context)
     else :   
@@ -37,10 +55,10 @@ def create_key_submit(request):
 @login_required
 def key_submit(request):
     if request.method == 'POST':
-        pyautogui.alert('berhasil')
+        pyautogui.alert('Save Sucesfully')
         return render(request, 'aps/newkey.html')
     else :   
-        pyautogui.alert('gagal')
+        pyautogui.alert('Failed')
         return render(request, 'aps/newkey.html')      
 
 @login_required

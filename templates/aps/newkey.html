@@ -24,13 +24,13 @@
           <label class="form-label col-md-3" for="encrypttype">Encryption Type</label>
             <div class="col-md-9">
               <select class="form-control" id="encrypttype" name="encrypttype">
-                <option value ="RSA">RSA</option>
-                <option value ="ECDCA">Elliptic Curve DSA</option>
+                <option value ="RSA3072">RSA (3072)</option>
+                <option value ="ECDSA">Elliptic Curve DSA</option> 
                 <option value ="DSA">Digital Signature Algorithm</option>
+                <option value ="HS224">Hashing Algorithms (224)</option>
               </select>
             </div>
         </div>
-
 
         <div class="row">
           <div class="col-12 text-center">
@@ -49,15 +49,15 @@
             <div class="form-group row">
               <label class="form-label col-md-3" for="public">Public Key</label>
                 <div class="col-md-9">
-                <textarea readonly type="text" name="public" maxlength="255"  class="form-control form-control-sm" 
-                title="" required="" id="public"> {{ hasil }}</textarea> 
+                <textarea readonly type="text" name="public" rows="10"  class="form-control form-control-sm" 
+                required="" id="public"> {{ public }}</textarea> 
               </div>
           </div>
             <div class="form-group row">
               <label class="form-label col-md-3" for="private">Private Key</label>
                 <div class="col-md-9">
-                <textarea readonly type="text" name="private" maxlength="255"  class="form-control form-control-sm" 
-                title="" required="" id="private" > </textarea>
+                <textarea readonly type="text" name="private" rows="10"  class="form-control form-control-sm" 
+                required="" id="private" >{{ private }}</textarea>
               </div>
           </div>
 
