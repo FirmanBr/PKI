@@ -31,7 +31,7 @@ def create_key_submit(request):
         encrypttype = request.POST.get('encrypttype')
         if encrypttype == 'RSA1024':
 
-            encrypttype = encrypttype;
+            encrypttype = encrypttype
 
             private_key_rsa = rsa.generate_private_key(
                 public_exponent=65537,
@@ -53,7 +53,7 @@ def create_key_submit(request):
                    
         elif encrypttype =='ECDSA1024':
 
-            encrypttype = encrypttype;
+            encrypttype = encrypttype
 
             private_key_ecdsa = ec.generate_private_key(
                 ec.SECP384R1(), default_backend()
@@ -74,7 +74,7 @@ def create_key_submit(request):
 
         elif encrypttype =='DSA1024':
 
-            encrypttype = encrypttype;
+            encrypttype = encrypttype
             
             private_key_dsa = dsa.generate_private_key(
                 key_size=1024,
@@ -101,7 +101,7 @@ def create_key_submit(request):
 
         elif encrypttype =='HASH256':
 
-            encrypttype = encrypttype;
+            encrypttype = encrypttype
 
             digest = hashes.Hash(hashes.SHA256(), backend=default_backend())
             digest.update(b"{{ encrypttype }}")
