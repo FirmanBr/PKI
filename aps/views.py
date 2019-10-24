@@ -1,12 +1,12 @@
-from django.shortcuts import render
 from aps.forms import UserForm,UserProfileInfoForm
+from cryptography.fernet import Fernet
+from datetime import datetime
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render
 from django.urls import reverse
-from datetime import datetime
-
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.primitives.asymmetric import dsa
@@ -14,9 +14,8 @@ from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives import serialization
 
-
 import mysql.connector
-
+import pyautogui
 
 def index(request):
     return render(request,'aps/index.html')

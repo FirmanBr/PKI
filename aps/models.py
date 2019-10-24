@@ -8,3 +8,10 @@ class UserProfileInfo(models.Model):
   
 def __str__(self):
   return self.user.username
+
+class masterkey(models.Model):
+    no = models.IntegerField(primary_key=True)
+    id = models.CharField(max_length=100)
+    kunci = models.CharField(max_length=100)
+
+         
