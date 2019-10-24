@@ -11,6 +11,6 @@ Preparation
 how to run :
 
 - Install Python 3.6.0
-- Install All Libaries you can see in requirements.txt
+- Install All Libaries you can see in libary.txt
 - Now Running Script in Your Path Directory with script in CMD : python manage.py runserver (Port Your Server Application) 
 # PKI
