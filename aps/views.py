@@ -6,13 +6,17 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from datetime import datetime
-from cryptography.fernet import Fernet
-from Crypto.PublicKey import RSA
-from Crypto.Cipher import PKCS1_OAEP
 
-import pyautogui
+from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.hazmat.primitives.asymmetric import dsa
+from cryptography.hazmat.primitives.asymmetric import ec
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives import serialization
+
+
 import mysql.connector
-import binascii
+
 
 def index(request):
     return render(request,'aps/index.html')
@@ -26,27 +30,99 @@ def create_key_submit(request):
     if request.method == 'POST':
 
         encrypttype = request.POST.get('encrypttype')
-        if encrypttype == 'RSA3072':
-       
-            keyPair = RSA.generate(3072)
-            pubKey = keyPair.publickey()
+        if encrypttype == 'RSA1024':
 
-            kuncipub = pubKey.exportKey()
-            kuncipub1 = keyPair.exportKey()
+            encrypttype = encrypttype;
 
-        elif encrypttype =='ECDSA':
-            kuncipub = 'ecdsa'
-            kuncipub1 = 'ecdsa1'   
+            private_key_rsa = rsa.generate_private_key(
+                public_exponent=65537,
+                key_size=1024,
+                backend=default_backend()
+            )
 
+            kuncipub1 = private_key_rsa.private_bytes(
+                encoding=serialization.Encoding.PEM,
+                format=serialization.PrivateFormat.PKCS8,
+                encryption_algorithm=serialization.BestAvailableEncryption(b'{{ encrypttype }}')
+                )
+
+            public_key = private_key_rsa.public_key()
+            kuncipub = public_key.public_bytes(
+                encoding=serialization.Encoding.PEM,
+                format=serialization.PublicFormat.SubjectPublicKeyInfo
+            )
+                   
+        elif encrypttype =='ECDSA1024':
+
+            encrypttype = encrypttype;
+
+            private_key_ecdsa = ec.generate_private_key(
+                ec.SECP384R1(), default_backend()
+            )
+
+            data = b"{{ encrypttype }}"
+            
+            signature = private_key_ecdsa.sign(
+                data,
+                ec.ECDSA(hashes.SHA256())
+            ) 
+
+            public_key = private_key_ecdsa.public_key()
+            hasil = public_key.verify(signature, data, ec.ECDSA(hashes.SHA256()))
+
+            kuncipub = hasil
+            kuncipub1 = signature
+
+        elif encrypttype =='DSA1024':
+
+            encrypttype = encrypttype;
+            
+            private_key_dsa = dsa.generate_private_key(
+                key_size=1024,
+                backend=default_backend()
+            )
+
+            data = b"{{ encrypttype }}"
+            
+            signature = private_key_dsa.sign(
+                data,
+                hashes.SHA256()
+            )
+
+            public_key = private_key_dsa.public_key()
+
+            hasil = public_key.verify(
+                signature,
+                data,
+                hashes.SHA256()
+            )
+
+            kuncipub = hasil
+            kuncipub1 = signature
+
+        elif encrypttype =='HASH256':
+
+            encrypttype = encrypttype;
+
+            digest = hashes.Hash(hashes.SHA256(), backend=default_backend())
+            digest.update(b"{{ encrypttype }}")
+            hasil = digest.finalize()
+
+            kuncipub = 'none'
+            kuncipub1 = hasil
+        
         else :
-            kuncipub = 'dll'
-            kuncipub1 = 'dll1'
+            kuncipub = 'Failed'
+            kuncipub1 = 'Failed'            
             
         context= {
             'public': kuncipub,
             'private':kuncipub1,
         }
+
+        
         return render(request, 'aps/newkey.html',context)
+
     else :   
         pyautogui.alert('Failed')
         return render(request, 'aps/newkey.html')
