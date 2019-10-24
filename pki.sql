@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2019 at 03:12 AM
+-- Generation Time: Oct 24, 2019 at 08:28 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.8
 
@@ -179,7 +179,15 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (33, 'Can add certificate', 9, 'add_cert'),
 (34, 'Can change certificate', 9, 'change_cert'),
 (35, 'Can delete certificate', 9, 'delete_cert'),
-(36, 'Can view certificate', 9, 'view_cert');
+(36, 'Can view certificate', 9, 'view_cert'),
+(37, 'Can add master key', 10, 'add_masterkey'),
+(38, 'Can change master key', 10, 'change_masterkey'),
+(39, 'Can delete master key', 10, 'delete_masterkey'),
+(40, 'Can view master key', 10, 'view_masterkey'),
+(41, 'Can add master', 11, 'add_master'),
+(42, 'Can change master', 11, 'change_master'),
+(43, 'Can delete master', 11, 'delete_master'),
+(44, 'Can view master', 11, 'view_master');
 
 -- --------------------------------------------------------
 
@@ -206,8 +214,8 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$120000$MqyCW11Apmy0$DRj+s45Jw8LDQfdT2z12Gy9F3M7xbz78sWivPhJYWtM=', '2019-10-22 09:51:52.382635', 1, 'firman', 'firman', 'brilian', 'firmanbrlian@gmail.com', 1, 1, '2019-10-18 02:51:36.000000'),
-(2, 'pbkdf2_sha256$120000$Dap786KYTXoV$qnB+OUxBaNLlWmPA6hO3PR+rW2Lk8dbCdQIAEyp+Flg=', '2019-10-22 07:51:44.875202', 0, 'ian', 'ian', 'agung', 'ian.agung@len.co.id', 0, 1, '2019-10-22 06:34:36.000000');
+(1, 'pbkdf2_sha256$120000$MqyCW11Apmy0$DRj+s45Jw8LDQfdT2z12Gy9F3M7xbz78sWivPhJYWtM=', '2019-10-24 01:46:58.102624', 1, 'firman', 'firman', 'brilian', 'firmanbrlian@gmail.com', 1, 1, '2019-10-18 02:51:36.000000'),
+(2, 'pbkdf2_sha256$120000$Dap786KYTXoV$qnB+OUxBaNLlWmPA6hO3PR+rW2Lk8dbCdQIAEyp+Flg=', '2019-10-24 06:00:49.812380', 0, 'ian', 'ian', 'agung', 'ian.agung@len.co.id', 0, 1, '2019-10-22 06:34:36.000000');
 
 -- --------------------------------------------------------
 
@@ -288,6 +296,8 @@ CREATE TABLE `django_content_type` (
 
 INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (1, 'admin', 'logentry'),
+(11, 'aps', 'master'),
+(10, 'aps', 'masterkey'),
 (7, 'aps', 'userprofileinfo'),
 (3, 'auth', 'group'),
 (2, 'auth', 'permission'),
@@ -337,7 +347,11 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (20, 'django_x509', '0002_certificate', '2019-10-18 06:15:02.675815'),
 (21, 'django_x509', '0003_rename_organization_field', '2019-10-18 06:15:02.691729'),
 (22, 'django_x509', '0004_auto_20171207_1450', '2019-10-18 06:15:02.746581'),
-(23, 'django_x509', '0005_organizational_unit_name', '2019-10-18 06:15:02.774562');
+(23, 'django_x509', '0005_organizational_unit_name', '2019-10-18 06:15:02.774562'),
+(24, 'aps', '0002_masterkey', '2019-10-24 05:48:42.382957'),
+(25, 'aps', '0003_auto_20191024_1257', '2019-10-24 05:59:25.891353'),
+(26, 'aps', '0004_master', '2019-10-24 05:59:25.905494'),
+(27, 'aps', '0005_auto_20191024_1303', '2019-10-24 06:03:27.855716');
 
 -- --------------------------------------------------------
 
@@ -356,6 +370,7 @@ CREATE TABLE `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+('ceqptfxgpb2tp8e4cfqdlynywk3ekzx1', 'NjZjNmNiOTRhZDQwY2E2OTk2YWQwY2FkNzllNmZhYzhiNjA5ZDA4MDp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwODM4MmNkYjk0YWYzNDZiNDBmZDcxNzAxNDc3YjcwZTdlZmRiODA5In0=', '2019-11-07 06:00:49.816369'),
 ('i16m0oelp7r42fhvqyc1f1ca4jgj6e46', 'MTIxNjJlYmYyNzJlYmE5M2U5ZDYzOGM1YzNmNzZlYmEzNmMxOGEwNzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJmYTg1MjI4ZmI4ZjQzMTQ5MmQxNTFjZTgxYjI2NDRhNDhiZjUyYTk5In0=', '2019-11-01 08:16:19.816231'),
 ('l3jwcm95fn1cc9ofkrmdx6erc0dxodue', 'ZGVlYjZmZGY2ZGM2ZjU2ZjYzMjFmZWY3MzlhYjkyMWUzYjNmMDQzYTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwNjZmZTUzYjA0NWQ5NWQ5OTA5YjkzZmMzNmMyYTFiMjAwODNlOGVlIn0=', '2019-11-04 03:14:56.858564'),
 ('pmat913k4gx975gttqesb0yyjh2gj6dh', 'MTIxNjJlYmYyNzJlYmE5M2U5ZDYzOGM1YzNmNzZlYmEzNmMxOGEwNzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJmYTg1MjI4ZmI4ZjQzMTQ5MmQxNTFjZTgxYjI2NDRhNDhiZjUyYTk5In0=', '2019-11-04 09:16:27.051789'),
@@ -431,7 +446,7 @@ CREATE TABLE `django_x509_cert` (
 
 CREATE TABLE `masterkey` (
   `no` int(11) NOT NULL,
-  `id` varchar(300) NOT NULL,
+  `id` varchar(100) NOT NULL,
   `kunci` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -440,11 +455,7 @@ CREATE TABLE `masterkey` (
 --
 
 INSERT INTO `masterkey` (`no`, `id`, `kunci`) VALUES
-(4, '1', 'gAAAAABdr-xFS4qYsES5M1uGuf2ff9o71V8UqXFXENVQ67W9PRUrktX4bajc9v20vc0FbuACy5Bg8KM3cU2_oe3KKxsEvEzfaw=='),
-(5, '1', 'gAAAAABdr_ZM0B6S_aFISWg4uuzXchSp3FciUOF8OBL3MZ8gt_8RWUYr7tpUUbWeOd_Q3bGFkYkUCaugHuc4FdKzY696xp157A=='),
-(6, '1', 'gAAAAABdr_fxtcmj6cozgq9bxk-nJanJJIS4HKN74nccRCk-o4UwuW65-9WGK2zGWAdD8tOBVlBBGh9PEWWQC1L3Sss0E99yrA=='),
-(7, '1', 'gAAAAABdsBjG_NBKp3L1hC3AdNWNHCk6ESf3-Or62owSAUC2yr5x4QWIrSpp4T0yzaALxcy1NExIRxMtmGBwoT5ObzWaIfEhkg=='),
-(8, '1', 'gAAAAABdsBlEy7bTqPZHlA79QilAR2sXe8vU545VwGTQb-kG4_4QfRBHQJ6rGYgRdGkExvj-n276dZYSGme2fLRVP95KI7enlw==');
+(1, '2', 'gAAAAABdsUMI47--KvjZl9PSQWSrZ5uHVi9aidTYZ6mmYp5_mO6mQd0NAc4HiM17WpTKvC5_z63_9FyE8CTQAJGloZFET-Ni5w==');
 
 --
 -- Indexes for dumped tables
@@ -575,7 +586,7 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `auth_user`
@@ -605,13 +616,13 @@ ALTER TABLE `django_admin_log`
 -- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `django_x509_ca`
@@ -629,7 +640,7 @@ ALTER TABLE `django_x509_cert`
 -- AUTO_INCREMENT for table `masterkey`
 --
 ALTER TABLE `masterkey`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
