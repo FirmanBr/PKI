@@ -11,7 +11,7 @@ def __str__(self):
 
 class masterkey(models.Model):
     no = models.IntegerField(primary_key=True)
-    id = models.CharField(max_length=200)
+    id = models.CharField(max_length=100)
     kunci = models.CharField(max_length=100)
 
          
