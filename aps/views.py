@@ -143,7 +143,7 @@ def master_key(request):
 def master_key_submit(request):
         if request.method == 'POST':
 
-            db = mysql.connector.connect(host='localhost',database='pki',user='root',password='')
+            db = mysql.connector.connect(host='localhost',database='pkilen',user='root',password='')
             cursor = db.cursor(buffered=True)
 
             nik = request.POST.get('id')
@@ -154,7 +154,7 @@ def master_key_submit(request):
             f = Fernet(key)
             encrypted = f.encrypt(message)
  
-            sql1 = "insert into masterkey(no, id, kunci) VALUES(%s, %s,%s)"
+            sql1 = "insert into mainkey(no, id, kunci) VALUES(%s, %s,%s)"
             val = ("",nik,encrypted)
 
             cursor.execute(sql1,val)
