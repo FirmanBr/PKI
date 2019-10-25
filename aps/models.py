@@ -17,3 +17,6 @@ class mainkey(models.Model):
     class Meta:
         managed = False
         db_table = 'mainkey'
+
+    def __str__(self):
+      return self.no
