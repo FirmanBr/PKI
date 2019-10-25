@@ -17,6 +17,10 @@ from cryptography.hazmat.primitives import serialization
 import mysql.connector
 import pyautogui
 
+db = mysql.connector.connect(host='localhost',database='pkilen',user='root',password='')
+key = Fernet.generate_key()
+f = Fernet(key)
+
 def index(request):
     return render(request,'aps/index.html')
 
@@ -28,9 +32,22 @@ def create_key(request):
 def create_key_submit(request):
     if request.method == 'POST':
 
+        comparison = ' { user.id } ' 
+
+        print (comparison)     
+        
+        #sql_select_Query = "select kunci from mainkey where id = '{{comparison}}' "
+        #cursor = db.cursor()
+        #cursor.execute(sql_select_Query)
+        
+        #print(cursor.fetchall()) 
+        
+        #coba = f.decrypt(b) 
+        #pyautogui.alert(coba)
+
         encrypttype = request.POST.get('encrypttype')
         if encrypttype == 'RSA1024':
-
+            
             encrypttype = encrypttype
 
             private_key_rsa = rsa.generate_private_key(
@@ -143,16 +160,14 @@ def master_key(request):
 def master_key_submit(request):
         if request.method == 'POST':
 
-            db = mysql.connector.connect(host='localhost',database='pkilen',user='root',password='')
+            
             cursor = db.cursor(buffered=True)
 
             nik = request.POST.get('id')
             username = request.POST.get('username')
 
             message = username.encode()
-            key = Fernet.generate_key()
-            f = Fernet(key)
-            encrypted = f.encrypt(message)
+            encrypted = f.encrypt(b"{{ message }}")
  
             sql1 = "insert into mainkey(no, id, kunci) VALUES(%s, %s,%s)"
             val = ("",nik,encrypted)
