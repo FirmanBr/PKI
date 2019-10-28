@@ -13,7 +13,7 @@ class AuthUser(models.Model):
     is_staff = models.IntegerField()
     is_active = models.IntegerField()
     date_joined = models.DateTimeField()
-    acces = models.CharField(max_length=250)
+    acces = models.CharField(max_length=255)
 
     class Meta:
         managed = False
