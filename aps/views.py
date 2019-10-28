@@ -27,7 +27,7 @@ def index(request):
 @login_required
 def create_key(request):
 
-    return render(request, 'aps/newkey.html')   
+    return render(request, 'aps/newkey.html',)   
 
 
 @login_required
