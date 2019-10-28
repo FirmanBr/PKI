@@ -3,6 +3,7 @@ from django.db import models
 from aps.models import UserProfileInfo, User
 from .models import Profile
 from django.contrib.auth.admin import UserAdmin
+#from ..models import DjangoX509Ca
 
 class ProfileInline(admin.StackedInline):
     model = Profile
@@ -21,5 +22,6 @@ class CustomUserAdmin(UserAdmin):
 admin.site.register(UserProfileInfo)
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
+#admin.site.register(DjangoX509Ca)
 
 
