@@ -36,7 +36,8 @@
         <ul class="nav navbar-nav">
 
           <li><a class="navbar-link" href="{% url 'index' %}">Home</a></li>
-          <li><a class="navbar-link" href="{% url 'aps:about' %}">About US</a></li>    
+          <li><a class="navbar-link" href="{% url 'aps:about' %}">{{user.username}}</a></li>    
+          
           <li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li> 
 
           {% if user.is_authenticated %}
@@ -61,12 +62,10 @@
             <li><a href="#">Certificate</a></li>
           {% endif %}
 
-
           {% if user.is_authenticated %}
             <li><a href="#">Revocation</a></li>
           {% endif %}
 
-          
           {% if user.is_authenticated %}
             <li><a href="{% url 'logout' %}">Logout</a></li>
           {% else %}

@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render
 from django.urls import reverse
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import rsa
@@ -14,7 +14,7 @@ from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives import serialization
 
-from .models import mainkey 
+from .models import mainkey,Profile
 
 
 import mysql.connector
@@ -23,6 +23,9 @@ import pyautogui
 db = mysql.connector.connect(host='localhost',database='pkilen',user='root',password='')
 key = Fernet.generate_key()
 f = Fernet(key)
+
+auth = Profile.objects.all()
+job = {'auth': auth}
 
 def index(request):
     return render(request,'aps/index.html')
@@ -35,7 +38,7 @@ def create_key(request):
 
     return render(request, 'aps/newkey.html', context )   
     
-
+    
     
 
 @login_required
@@ -188,6 +191,7 @@ def master_key_submit(request):
             cursor.execute(sql1,val)
             db.commit()
 
+            pyautogui.alert('Master Key Created')
             return render(request, 'aps/masterkey.html') 
         else :
             pyautogui.alert('Failed')  
@@ -213,7 +217,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request,user)
-                return HttpResponseRedirect(reverse('index'))
+                return render(request, 'aps/index.html',job)
             else:
                 return HttpResponse("Your account was inactive.")
         else:

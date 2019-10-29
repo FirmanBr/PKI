@@ -50,7 +50,8 @@
           <div class="col-12 text-center">
             <div class="form-group">
               <button type="submit" class="btn btn-primary btn-block" {% for hasil in test %}   
-              {% if hasil.id >= '1' %} disabled  {% else %} enabled {% endif %}   {% endfor %} >
+              {% if hasil.id >= '1' %} disabled  {% else %} enabled {% endif %}   {% endfor %} 
+              onClick="window.location.reload();">
               GENERATE
               </button>
             </div>
