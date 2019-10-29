@@ -33,8 +33,6 @@ def create_key(request):
     context = {'test': test}
 
     return render(request, 'aps/newkey.html', context )   
-    
-
 
 @login_required
 def create_key_submit(request):
@@ -162,7 +160,10 @@ def key_submit(request):
 
 @login_required
 def master_key(request):
-    return render(request, 'aps/masterkey.html') 
+
+    test = mainkey.objects.all()[:1]
+    context = {'test': test}
+    return render(request, 'aps/masterkey.html' , context ) 
 
 @login_required
 def master_key_submit(request):
