@@ -16,6 +16,8 @@ from cryptography.hazmat.primitives import serialization
 
 import mysql.connector
 import pyautogui
+from .models import mainkey 
+
 
 db = mysql.connector.connect(host='localhost',database='pkilen',user='root',password='')
 key = Fernet.generate_key()
@@ -27,7 +29,10 @@ def index(request):
 @login_required
 def create_key(request):
 
+    #test = mainkey.objects.all()
+    #pyautogui.alert(test)
     return render(request, 'aps/newkey.html',)   
+    
 
 
 @login_required
