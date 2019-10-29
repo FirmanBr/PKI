@@ -48,8 +48,8 @@ class mainkey(models.Model):
         managed = True
         db_table = 'mainkey'
 
-    def __unicode__(self):
-      return self.id
+    def __str__(self):
+      return self.kunci
 
 
     

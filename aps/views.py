@@ -29,9 +29,10 @@ def index(request):
 @login_required
 def create_key(request):
 
-    #test = mainkey.objects.all()
-    #pyautogui.alert(test)
-    return render(request, 'aps/newkey.html',)   
+    test = mainkey.objects.all()[:1]
+    context = {'test': test}
+
+    return render(request, 'aps/newkey.html', context )   
     
 
 
