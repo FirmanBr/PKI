@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.urls import reverse
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import rsa
@@ -14,10 +14,11 @@ from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives import serialization
 
-import mysql.connector
-import pyautogui
 from .models import mainkey 
 
+
+import mysql.connector
+import pyautogui
 
 db = mysql.connector.connect(host='localhost',database='pkilen',user='root',password='')
 key = Fernet.generate_key()
@@ -33,6 +34,9 @@ def create_key(request):
     context = {'test': test}
 
     return render(request, 'aps/newkey.html', context )   
+    
+
+    
 
 @login_required
 def create_key_submit(request):
@@ -184,7 +188,6 @@ def master_key_submit(request):
             cursor.execute(sql1,val)
             db.commit()
 
-            pyautogui.alert('Master Key Created')
             return render(request, 'aps/masterkey.html') 
         else :
             pyautogui.alert('Failed')  
