@@ -19,6 +19,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('no', models.AutoField(primary_key=True, serialize=False)),
                 ('id', models.CharField(max_length=100)),
+                ('namakunci', models.CharField(max_length=100)),
                 ('kunci', models.TextField()),
             ],
             options={

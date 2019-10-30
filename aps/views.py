@@ -17,10 +17,16 @@ from .models import mainkey,Profile
 
 import mysql.connector
 import pyautogui
+import time
+import hvac
+import pybase64
+import sys
+import base64
 
 db = mysql.connector.connect(host='localhost',database='pkilen',user='root',password='')
 key = Fernet.generate_key()
 f = Fernet(key)
+client = hvac.Client(url='http://127.0.0.1:8200')
 
 auth = Profile.objects.all()
 job = {'auth': auth}
@@ -171,23 +177,46 @@ def master_key(request):
 def master_key_submit(request):
         if request.method == 'POST':
 
+            def base64ify(bytes_or_str):
+                if sys.version_info[0] >= 3 and isinstance(bytes_or_str, str):
+                    input_bytes = bytes_or_str.encode('utf8')
+                else:
+                    input_bytes = bytes_or_str
+
+                output_bytes = base64.urlsafe_b64encode(input_bytes)
+    
+                if sys.version_info[0] >= 3:
+                    return output_bytes.decode('ascii')
+                else:
+                    return output_bytes
+            
             
             cursor = db.cursor(buffered=True)
 
             nik = request.POST.get('id')
             username = request.POST.get('username')
+            isikunci = request.POST.get('isikunci')
 
-            message = username.encode()
-            encrypted = f.encrypt(b"{{ message }}")
- 
-            sql1 = "insert into mainkey(no, id, kunci) VALUES(%s, %s,%s)"
-            val = ("",nik,encrypted)
+            client.secrets.transit.create_key(name=username)
+
+            encrypt_data_response = client.secrets.transit.encrypt_data(
+                name= username,
+                plaintext=base64ify(isikunci.encode()),
+            )
+
+            ciphertext = encrypt_data_response['data']['ciphertext']
+            hasilvault = ciphertext
+
+            sql1 = "insert into mainkey(no, id, namakunci, kunci) VALUES(%s, %s, %s, %s)"
+            val = ("",nik,username,hasilvault)
 
             cursor.execute(sql1,val)
             db.commit()
 
             pyautogui.alert('Master Key Created')
-            return render(request, 'aps/masterkey.html') 
+            time.sleep( 5 )
+            return render(request, 'aps/masterkey.html')  
+
         else :
             pyautogui.alert('Failed')  
             return render(request, 'aps/masterkey.html') 
@@ -212,7 +241,6 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request,user)
-
 
                 return render(request, 'aps/index.html')
 

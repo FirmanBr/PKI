@@ -25,13 +25,24 @@
         </div>
 
         <div class="form-group row">
-          <label class="form-label col-md-3" for="username">Username</label>
+          <label class="form-label col-md-3" for="username">Nama Kunci</label>
             <div class="col-md-9">
               <input readonly type="text" name="username"
                 maxlength="255"
                 class="form-control form-control-sm"
                  title="" required=""
-                id="username" value = {{ user.username }} >
+                id="username" value = "{{ user.username }}" >
+            </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="form-label col-md-3" for="isikunci">Isi Kunci</label>
+            <div class="col-md-9">
+              <input type="text" name="isikunci"
+                maxlength="255"
+                class="form-control form-control-sm"
+                 title="" required=""
+                id="isikunci" >
             </div>
         </div>
 
@@ -51,7 +62,7 @@
             <div class="form-group">
               <button type="submit" class="btn btn-primary btn-block" {% for hasil in test %}   
               {% if hasil.id >= '1' %} disabled  {% else %} enabled {% endif %}   {% endfor %} 
-              onClick="window.location.reload();">
+              onClick="history.go(0)">
               GENERATE
               </button>
             </div>

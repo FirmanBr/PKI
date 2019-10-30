@@ -42,6 +42,7 @@ class UserProfileInfo(models.Model):
 class mainkey(models.Model):
     no = models.AutoField(primary_key=True)
     id = models.CharField(max_length=100)
+    namakunci = models.CharField(max_length=100)
     kunci = models.TextField()
 
     class Meta:
