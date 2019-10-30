@@ -214,7 +214,6 @@ def master_key_submit(request):
             db.commit()
 
             pyautogui.alert('Master Key Created')
-            time.sleep( 5 )
             return render(request, 'aps/index.html')  
 
         else :
