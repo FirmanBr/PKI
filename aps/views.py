@@ -215,7 +215,7 @@ def master_key_submit(request):
 
             pyautogui.alert('Master Key Created')
             time.sleep( 5 )
-            return render(request, 'aps/masterkey.html')  
+            return render(request, 'aps/index.html')  
 
         else :
             pyautogui.alert('Failed')  
