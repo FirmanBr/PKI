@@ -13,9 +13,7 @@ from cryptography.hazmat.primitives.asymmetric import dsa
 from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives import serialization
-
 from .models import mainkey,Profile
-
 
 import mysql.connector
 import pyautogui
@@ -38,9 +36,6 @@ def create_key(request):
 
     return render(request, 'aps/newkey.html', context )   
     
-    
-    
-
 @login_required
 def create_key_submit(request):
     if request.method == 'POST':
@@ -217,7 +212,10 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request,user)
-                return render(request, 'aps/index.html',job)
+
+
+                return render(request, 'aps/index.html')
+
             else:
                 return HttpResponse("Your account was inactive.")
         else:

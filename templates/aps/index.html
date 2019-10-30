@@ -11,12 +11,6 @@
 
     {% if user.is_authenticated %}
         <h3>Hello {{ user.username }}
-        {% for peran in auth %}
-            {% if  peran.user_id == user.id %} 
-              {{ peran.role }}
-            {% else %}  
-            {% endif %} 
-        {% endfor %}</h3>
     {% else %}
 
     {% endif %}
