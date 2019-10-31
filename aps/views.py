@@ -45,10 +45,6 @@ def create_key(request):
 @login_required
 def create_key_submit(request):
     if request.method == 'POST':
-
-        comparison = ' { user.id } ' 
-
-        print (comparison)     
         
         #sql_select_Query = "select kunci from mainkey where id = '{{comparison}}' "
         #cursor = db.cursor()
@@ -60,13 +56,22 @@ def create_key_submit(request):
         #pyautogui.alert(coba)
 
         encrypttype = request.POST.get('encrypttype')
-        if encrypttype == 'RSA1024':
+        bit         = request.POST.get('bit')    
+
+        if encrypttype == 'RSA':
+
+            if bit  =='512':
+                bit = 512
+            elif bit  =='1024':
+                bit = 1024
+            else :
+                bit = 2048           
             
             encrypttype = encrypttype
 
             private_key_rsa = rsa.generate_private_key(
                 public_exponent=65537,
-                key_size=1024,
+                key_size= bit ,
                 backend=default_backend()
             )
 
@@ -82,7 +87,7 @@ def create_key_submit(request):
                 format=serialization.PublicFormat.SubjectPublicKeyInfo
             )
                    
-        elif encrypttype =='ECDSA1024':
+        elif encrypttype =='ECDSA':
 
             encrypttype = encrypttype
 
@@ -103,12 +108,19 @@ def create_key_submit(request):
             kuncipub = hasil
             kuncipub1 = signature
 
-        elif encrypttype =='DSA1024':
+        elif encrypttype =='DSA':
+
+            if bit  =='1024':
+                bit = 1024
+            elif bit  =='2048':
+                bit = 2048
+            else :
+                bit = 3072   
 
             encrypttype = encrypttype
             
             private_key_dsa = dsa.generate_private_key(
-                key_size=1024,
+                key_size=bit,
                 backend=default_backend()
             )
 
@@ -130,11 +142,20 @@ def create_key_submit(request):
             kuncipub = hasil
             kuncipub1 = signature
 
-        elif encrypttype =='HASH256':
+        elif encrypttype =='HASH':
 
             encrypttype = encrypttype
 
-            digest = hashes.Hash(hashes.SHA256(), backend=default_backend())
+            if bit == 'SHA224': 
+                key = hashes.SHA224()
+            elif  bit == 'SHA256': 
+                key = hashes.SHA256()  
+            elif  bit == 'SHA384': 
+                key = hashes.SHA384()
+            else :
+                key = hashes.SHA512()                
+
+            digest = hashes.Hash(key, backend=default_backend())
             digest.update(b"{{ encrypttype }}")
             hasil = digest.finalize()
 

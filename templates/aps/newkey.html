@@ -1,6 +1,67 @@
 {% extends "aps/base.html" %}
 {% block body_block %}
 
+
+<script language="javascript" type="text/javascript"> 
+
+$(document).ready(function(){
+
+var RSA = [
+	{display: "512", value: "512" }, 
+	{display: "1024", value: "1024" }, 
+	{display: "2048", value: "2048" }]; 
+
+var ECDSA = [
+	{display: "256", value: "256" }, 
+	{display: "512", value: "512" }, 
+	{display: "1024", value: "1024" }, 
+	{display: "2048", value: "2048" }]; 
+
+var DSA = [ 
+	{display: "1024",value: "1024" }, 
+	{display: "2048",value: "2048" },
+  {display: "3072", value: "3072" }];    
+	
+var HASH = [
+	{display: "224", value: "SHA224" }, 
+	{display: "256", value: "SHA256" }, 
+	{display: "384", value: "SHA384" }, 
+	{display: "512", value: "SHA512" }];  
+
+$("#encrypttype").change(function() {
+		var parent = $(this).val(); 
+		
+		switch(parent){ 
+			  case 'RSA':
+			 	list(RSA);
+				break;
+			  case 'HASH':
+			 	list(HASH);
+				break;	
+			  case 'ECDSA':
+			 	list(ECDSA);
+				break;
+        case 'DSA':
+			 	list(DSA);
+				break;	        		
+			default: 
+				$("#bit").html('');	 
+				break;
+		   }
+});
+
+function list(array_list)
+{
+	$("#bit").html(""); 
+	$(array_list).each(function (i) {  
+		$("#bit").append("<option value=\""+array_list[i].value+"\">"+array_list[i].display+"</option>");
+	});
+}
+
+});
+
+</script>
+
 <div class="container">
   <div class="jumbotron">
     <h3>
@@ -24,10 +85,19 @@
           <label class="form-label col-md-3" for="encrypttype">Encryption Type</label>
             <div class="col-md-9">
               <select class="form-control" id="encrypttype" name="encrypttype">
-                <option value ="RSA1024">RSA (1024)</option>
-                <option value ="ECDSA1024">Elliptic Curve DSA (1024) </option> 
-                <option value ="DSA1024">Digital Signature Algorithm (1024)</option>
-                <option value ="HASH256">Hashing Algorithms (256)</option>
+                <option value =""></option>
+                <option value ="RSA">RSA</option>
+                <option value ="ECDSA">Elliptic Curve DSA  </option> 
+                <option value ="DSA">Digital Signature Algorithm </option>
+                <option value ="HASH">Hashing Algorithms </option>
+              </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="form-label col-md-3" for="bitrsa">Bit Lenghth</label>
+            <div class="col-md-9">
+              <select class="form-control" id="bit" name="bit">
               </select>
             </div>
         </div>
@@ -75,6 +145,7 @@
 
         <p></p>
 </div>
+
 
 {% endblock %}
 
