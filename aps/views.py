@@ -1,6 +1,5 @@
 from aps.forms import UserForm,UserProfileInfoForm
 from cryptography.fernet import Fernet
-from datetime import datetime
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -18,6 +17,7 @@ from .models import mainkey,Profile
 import mysql.connector
 import pyautogui
 import time
+import datetime
 import hvac
 import pybase64
 import sys
@@ -215,21 +215,26 @@ def master_key_submit(request):
             cursor = db.cursor(buffered=True)
 
             nik = request.POST.get('id')
-            username = request.POST.get('username')
-            isikunci = request.POST.get('isikunci')
+            keyname = request.POST.get('keyname')
 
-            client.secrets.transit.create_key(name=username)
-
-            encrypt_data_response = client.secrets.transit.encrypt_data(
-                name= username,
-                plaintext=base64ify(isikunci.encode()),
+            client.secrets.transit.create_key(name=keyname)
+            client.secrets.transit.update_key_configuration(
+                name=keyname,
+                deletion_allowed=True,
+                exportable=True,
             )
 
-            ciphertext = encrypt_data_response['data']['ciphertext']
-            hasilvault = ciphertext
+            export_key_response = client.secrets.transit.export_key(
+                name=keyname,
+                key_type='hmac-key',
+            )
 
-            sql1 = "insert into mainkey(no, id, namakunci, kunci) VALUES(%s, %s, %s, %s)"
-            val = ("",nik,username,hasilvault)
+            ts = time.time()
+            timestamp = (datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S'))
+            key = export_key_response['data']['keys']
+        
+            sql1 = "insert into mainkey(no, id, key_name, time_start) VALUES(%s, %s, %s, %s)"
+            val = ("",nik,keyname,timestamp)
 
             cursor.execute(sql1,val)
             db.commit()

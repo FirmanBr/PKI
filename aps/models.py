@@ -42,8 +42,8 @@ class UserProfileInfo(models.Model):
 class mainkey(models.Model):
     no = models.AutoField(primary_key=True)
     id = models.CharField(max_length=100)
-    namakunci = models.CharField(max_length=100)
-    kunci = models.TextField()
+    key_name = models.TextField()
+    time_start = models.TimeField()
 
     class Meta:
         managed = True
