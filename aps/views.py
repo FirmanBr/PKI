@@ -28,7 +28,7 @@ import time
 
 
 
-db = mysql.connector.connect(host='localhost',database='pkilen',user='root',password='')
+db = mysql.connector.connect(host='localhost',database='pki',user='root',password='')
 key = Fernet.generate_key()
 f = Fernet(key)
 

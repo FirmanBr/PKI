@@ -63,7 +63,7 @@ WSGI_APPLICATION = 'pki.wsgi.application'
 DATABASES = {
     'default': {
                 'ENGINE': 'django.db.backends.mysql',
-                'NAME': 'pkilen',
+                'NAME': 'pki',
                 'USER': 'root',
                 'PASSWORD': "",
                 'HOST': "",
