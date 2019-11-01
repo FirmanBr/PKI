@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2019 at 08:35 AM
+-- Generation Time: Nov 01, 2019 at 10:22 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.8
 
@@ -21,6 +21,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `pki`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `aps_profile`
+--
+
+CREATE TABLE `aps_profile` (
+  `id` int(11) NOT NULL,
+  `role` smallint(5) UNSIGNED DEFAULT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `aps_profile`
+--
+
+INSERT INTO `aps_profile` (`id`, `role`, `user_id`) VALUES
+(1, 1, 1),
+(2, 2, 2),
+(3, 3, 3),
+(4, 4, 4),
+(5, 5, 5),
+(6, 6, 6);
 
 -- --------------------------------------------------------
 
@@ -43,17 +67,8 @@ CREATE TABLE `aps_userprofileinfo` (
 
 CREATE TABLE `auth_group` (
   `id` int(11) NOT NULL,
-  `name` varchar(150) NOT NULL
+  `name` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `auth_group`
---
-
-INSERT INTO `auth_group` (`id`, `name`) VALUES
-(1, 'admin'),
-(3, 'ca'),
-(2, 'user');
 
 -- --------------------------------------------------------
 
@@ -66,65 +81,6 @@ CREATE TABLE `auth_group_permissions` (
   `group_id` int(11) NOT NULL,
   `permission_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `auth_group_permissions`
---
-
-INSERT INTO `auth_group_permissions` (`id`, `group_id`, `permission_id`) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 1, 3),
-(4, 1, 4),
-(5, 1, 5),
-(6, 1, 6),
-(7, 1, 7),
-(8, 1, 8),
-(9, 1, 9),
-(10, 1, 10),
-(11, 1, 11),
-(12, 1, 12),
-(13, 1, 13),
-(14, 1, 14),
-(15, 1, 15),
-(16, 1, 16),
-(17, 1, 17),
-(18, 1, 18),
-(19, 1, 19),
-(20, 1, 20),
-(21, 1, 21),
-(22, 1, 22),
-(23, 1, 23),
-(24, 1, 24),
-(25, 1, 25),
-(26, 1, 26),
-(27, 1, 27),
-(28, 1, 28),
-(29, 1, 29),
-(30, 1, 30),
-(31, 1, 31),
-(32, 1, 32),
-(33, 1, 33),
-(34, 1, 34),
-(35, 1, 35),
-(36, 1, 36),
-(37, 2, 25),
-(38, 2, 26),
-(39, 2, 27),
-(40, 2, 28),
-(46, 3, 9),
-(47, 3, 25),
-(48, 3, 26),
-(49, 3, 27),
-(50, 3, 28),
-(51, 3, 29),
-(52, 3, 30),
-(53, 3, 31),
-(41, 3, 32),
-(42, 3, 33),
-(43, 3, 34),
-(44, 3, 35),
-(45, 3, 36);
 
 -- --------------------------------------------------------
 
@@ -144,50 +100,58 @@ CREATE TABLE `auth_permission` (
 --
 
 INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALUES
-(1, 'Can add log entry', 1, 'add_logentry'),
-(2, 'Can change log entry', 1, 'change_logentry'),
-(3, 'Can delete log entry', 1, 'delete_logentry'),
-(4, 'Can view log entry', 1, 'view_logentry'),
-(5, 'Can add permission', 2, 'add_permission'),
-(6, 'Can change permission', 2, 'change_permission'),
-(7, 'Can delete permission', 2, 'delete_permission'),
-(8, 'Can view permission', 2, 'view_permission'),
-(9, 'Can add group', 3, 'add_group'),
-(10, 'Can change group', 3, 'change_group'),
-(11, 'Can delete group', 3, 'delete_group'),
-(12, 'Can view group', 3, 'view_group'),
-(13, 'Can add user', 4, 'add_user'),
-(14, 'Can change user', 4, 'change_user'),
-(15, 'Can delete user', 4, 'delete_user'),
-(16, 'Can view user', 4, 'view_user'),
-(17, 'Can add content type', 5, 'add_contenttype'),
-(18, 'Can change content type', 5, 'change_contenttype'),
-(19, 'Can delete content type', 5, 'delete_contenttype'),
-(20, 'Can view content type', 5, 'view_contenttype'),
-(21, 'Can add session', 6, 'add_session'),
-(22, 'Can change session', 6, 'change_session'),
-(23, 'Can delete session', 6, 'delete_session'),
-(24, 'Can view session', 6, 'view_session'),
-(25, 'Can add user profile info', 7, 'add_userprofileinfo'),
-(26, 'Can change user profile info', 7, 'change_userprofileinfo'),
-(27, 'Can delete user profile info', 7, 'delete_userprofileinfo'),
-(28, 'Can view user profile info', 7, 'view_userprofileinfo'),
-(29, 'Can add CA', 8, 'add_ca'),
-(30, 'Can change CA', 8, 'change_ca'),
-(31, 'Can delete CA', 8, 'delete_ca'),
-(32, 'Can view CA', 8, 'view_ca'),
-(33, 'Can add certificate', 9, 'add_cert'),
-(34, 'Can change certificate', 9, 'change_cert'),
-(35, 'Can delete certificate', 9, 'delete_cert'),
-(36, 'Can view certificate', 9, 'view_cert'),
-(37, 'Can add master key', 10, 'add_masterkey'),
-(38, 'Can change master key', 10, 'change_masterkey'),
-(39, 'Can delete master key', 10, 'delete_masterkey'),
-(40, 'Can view master key', 10, 'view_masterkey'),
-(41, 'Can add master', 11, 'add_master'),
-(42, 'Can change master', 11, 'change_master'),
-(43, 'Can delete master', 11, 'delete_master'),
-(44, 'Can view master', 11, 'view_master');
+(1, 'Can add permission', 1, 'add_permission'),
+(2, 'Can change permission', 1, 'change_permission'),
+(3, 'Can delete permission', 1, 'delete_permission'),
+(4, 'Can view permission', 1, 'view_permission'),
+(5, 'Can add group', 2, 'add_group'),
+(6, 'Can change group', 2, 'change_group'),
+(7, 'Can delete group', 2, 'delete_group'),
+(8, 'Can view group', 2, 'view_group'),
+(9, 'Can add user', 3, 'add_user'),
+(10, 'Can change user', 3, 'change_user'),
+(11, 'Can delete user', 3, 'delete_user'),
+(12, 'Can view user', 3, 'view_user'),
+(13, 'Can add content type', 4, 'add_contenttype'),
+(14, 'Can change content type', 4, 'change_contenttype'),
+(15, 'Can delete content type', 4, 'delete_contenttype'),
+(16, 'Can view content type', 4, 'view_contenttype'),
+(17, 'Can add django x509 ca', 5, 'add_djangox509ca'),
+(18, 'Can change django x509 ca', 5, 'change_djangox509ca'),
+(19, 'Can delete django x509 ca', 5, 'delete_djangox509ca'),
+(20, 'Can view django x509 ca', 5, 'view_djangox509ca'),
+(21, 'Can add django x509 cert', 6, 'add_djangox509cert'),
+(22, 'Can change django x509 cert', 6, 'change_djangox509cert'),
+(23, 'Can delete django x509 cert', 6, 'delete_djangox509cert'),
+(24, 'Can view django x509 cert', 6, 'view_djangox509cert'),
+(25, 'Can add mainkey', 7, 'add_mainkey'),
+(26, 'Can change mainkey', 7, 'change_mainkey'),
+(27, 'Can delete mainkey', 7, 'delete_mainkey'),
+(28, 'Can view mainkey', 7, 'view_mainkey'),
+(29, 'Can add profile', 8, 'add_profile'),
+(30, 'Can change profile', 8, 'change_profile'),
+(31, 'Can delete profile', 8, 'delete_profile'),
+(32, 'Can view profile', 8, 'view_profile'),
+(33, 'Can add user profile info', 9, 'add_userprofileinfo'),
+(34, 'Can change user profile info', 9, 'change_userprofileinfo'),
+(35, 'Can delete user profile info', 9, 'delete_userprofileinfo'),
+(36, 'Can view user profile info', 9, 'view_userprofileinfo'),
+(37, 'Can add log entry', 10, 'add_logentry'),
+(38, 'Can change log entry', 10, 'change_logentry'),
+(39, 'Can delete log entry', 10, 'delete_logentry'),
+(40, 'Can view log entry', 10, 'view_logentry'),
+(41, 'Can add session', 11, 'add_session'),
+(42, 'Can change session', 11, 'change_session'),
+(43, 'Can delete session', 11, 'delete_session'),
+(44, 'Can view session', 11, 'view_session'),
+(45, 'Can add CA', 12, 'add_ca'),
+(46, 'Can change CA', 12, 'change_ca'),
+(47, 'Can delete CA', 12, 'delete_ca'),
+(48, 'Can view CA', 12, 'view_ca'),
+(49, 'Can add certificate', 13, 'add_cert'),
+(50, 'Can change certificate', 13, 'change_cert'),
+(51, 'Can delete certificate', 13, 'delete_cert'),
+(52, 'Can view certificate', 13, 'view_cert');
 
 -- --------------------------------------------------------
 
@@ -214,8 +178,12 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$120000$MqyCW11Apmy0$DRj+s45Jw8LDQfdT2z12Gy9F3M7xbz78sWivPhJYWtM=', '2019-10-24 01:46:58.102624', 1, 'firman', 'firman', 'brilian', 'firmanbrlian@gmail.com', 1, 1, '2019-10-18 02:51:36.000000'),
-(2, 'pbkdf2_sha256$120000$Dap786KYTXoV$qnB+OUxBaNLlWmPA6hO3PR+rW2Lk8dbCdQIAEyp+Flg=', '2019-10-24 06:00:49.812380', 0, 'ian', 'ian', 'agung', 'ian.agung@len.co.id', 0, 1, '2019-10-22 06:34:36.000000');
+(1, 'pbkdf2_sha256$120000$3TBeeO7sy4ah$VEXZ8W5rnRyOyI40Mc9OnhfLKLzSe4qIaO6OER7XR1A=', '2019-11-01 07:51:20.199824', 1, 'user1', '', '', 'firmanbrilian@gmail.com', 1, 1, '2019-11-01 07:49:10.000000'),
+(2, 'pbkdf2_sha256$120000$effgvnQvkJVW$NqwR0lssU9bOrGT6I+nZBBDQKkKhxeGdFWaGvJMEFe0=', '2019-11-01 07:59:18.384605', 0, 'user2', '', '', '', 0, 1, '2019-11-01 07:57:19.000000'),
+(3, 'pbkdf2_sha256$120000$xwqnRF5JUMl7$CKsFC6Ha/ajZqYb3HWxGzirYbmU9cwkq2oIYVdgBc/o=', NULL, 0, 'user3', '', '', '', 0, 1, '2019-11-01 07:57:31.000000'),
+(4, 'pbkdf2_sha256$120000$w6DGeextnGus$iBx164rRrL+35une5Vzxtz9fPDj2kIkwlYpZNS0Vixg=', NULL, 0, 'user4', '', '', '', 0, 1, '2019-11-01 07:57:41.000000'),
+(5, 'pbkdf2_sha256$120000$PyvDLIVtFAWx$zEVBexKBNupanZVHzM5wU1qacO5qs+N5F9Pmvd3wfMU=', NULL, 0, 'user5', '', '', '', 0, 1, '2019-11-01 07:57:50.000000'),
+(6, 'pbkdf2_sha256$120000$ps80u0by65IY$6DbNiUGePZ1ECKzTeqzlnd/UAZTIF5+r8DNn/+wbWi8=', NULL, 0, 'user6', '', '', '', 0, 1, '2019-11-01 07:58:00.000000');
 
 -- --------------------------------------------------------
 
@@ -228,13 +196,6 @@ CREATE TABLE `auth_user_groups` (
   `user_id` int(11) NOT NULL,
   `group_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `auth_user_groups`
---
-
-INSERT INTO `auth_user_groups` (`id`, `user_id`, `group_id`) VALUES
-(1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -270,13 +231,18 @@ CREATE TABLE `django_admin_log` (
 --
 
 INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`, `action_flag`, `change_message`, `content_type_id`, `user_id`) VALUES
-(1, '2019-10-22 06:34:36.416068', '2', 'ian', 1, '[{\"added\": {}}]', 4, 1),
-(2, '2019-10-22 06:35:14.631795', '2', 'ian', 2, '[{\"changed\": {\"fields\": [\"first_name\", \"last_name\", \"email\"]}}]', 4, 1),
-(3, '2019-10-22 06:35:35.573571', '1', 'firman', 2, '[{\"changed\": {\"fields\": [\"first_name\", \"last_name\"]}}]', 4, 1),
-(4, '2019-10-22 06:36:08.023205', '1', 'admin', 1, '[{\"added\": {}}]', 3, 1),
-(5, '2019-10-22 06:37:37.319735', '2', 'user', 1, '[{\"added\": {}}]', 3, 1),
-(6, '2019-10-22 06:38:41.827273', '3', 'ca', 1, '[{\"added\": {}}]', 3, 1),
-(7, '2019-10-22 06:39:08.573339', '1', 'firman', 2, '[{\"changed\": {\"fields\": [\"groups\"]}}]', 4, 1);
+(1, '2019-11-01 07:49:41.113747', '1', 'user1', 2, '[{\"changed\": {\"name\": \"profile\", \"object\": \"user1\", \"fields\": [\"role\"]}}]', 3, 1),
+(2, '2019-11-01 07:50:41.649948', '1', 'user1', 1, '[{\"added\": {}}]', 12, 1),
+(3, '2019-11-01 07:57:19.289144', '2', 'user2', 1, '[{\"added\": {}}]', 3, 1),
+(4, '2019-11-01 07:57:31.257535', '3', 'user3', 1, '[{\"added\": {}}]', 3, 1),
+(5, '2019-11-01 07:57:41.534705', '4', 'user4', 1, '[{\"added\": {}}]', 3, 1),
+(6, '2019-11-01 07:57:50.978760', '5', 'user5', 1, '[{\"added\": {}}]', 3, 1),
+(7, '2019-11-01 07:58:00.759917', '6', 'user6', 1, '[{\"added\": {}}]', 3, 1),
+(8, '2019-11-01 07:58:41.461630', '2', 'user2', 2, '[{\"changed\": {\"name\": \"profile\", \"object\": \"user2\", \"fields\": [\"role\"]}}]', 3, 1),
+(9, '2019-11-01 07:58:48.483710', '3', 'user3', 2, '[{\"changed\": {\"name\": \"profile\", \"object\": \"user3\", \"fields\": [\"role\"]}}]', 3, 1),
+(10, '2019-11-01 07:58:55.758725', '4', 'user4', 2, '[{\"changed\": {\"name\": \"profile\", \"object\": \"user4\", \"fields\": [\"role\"]}}]', 3, 1),
+(11, '2019-11-01 07:59:01.992889', '5', 'user5', 2, '[{\"changed\": {\"name\": \"profile\", \"object\": \"user5\", \"fields\": [\"role\"]}}]', 3, 1),
+(12, '2019-11-01 07:59:08.166240', '6', 'user6', 2, '[{\"changed\": {\"name\": \"profile\", \"object\": \"user6\", \"fields\": [\"role\"]}}]', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -295,17 +261,19 @@ CREATE TABLE `django_content_type` (
 --
 
 INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
-(1, 'admin', 'logentry'),
-(11, 'aps', 'master'),
-(10, 'aps', 'masterkey'),
-(7, 'aps', 'userprofileinfo'),
-(3, 'auth', 'group'),
-(2, 'auth', 'permission'),
-(4, 'auth', 'user'),
-(5, 'contenttypes', 'contenttype'),
-(8, 'django_x509', 'ca'),
-(9, 'django_x509', 'cert'),
-(6, 'sessions', 'session');
+(10, 'admin', 'logentry'),
+(5, 'aps', 'djangox509ca'),
+(6, 'aps', 'djangox509cert'),
+(7, 'aps', 'mainkey'),
+(8, 'aps', 'profile'),
+(9, 'aps', 'userprofileinfo'),
+(2, 'auth', 'group'),
+(1, 'auth', 'permission'),
+(3, 'auth', 'user'),
+(4, 'contenttypes', 'contenttype'),
+(12, 'django_x509', 'ca'),
+(13, 'django_x509', 'cert'),
+(11, 'sessions', 'session');
 
 -- --------------------------------------------------------
 
@@ -325,33 +293,27 @@ CREATE TABLE `django_migrations` (
 --
 
 INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
-(1, 'contenttypes', '0001_initial', '2019-10-18 02:35:38.271340'),
-(2, 'auth', '0001_initial', '2019-10-18 02:35:38.473782'),
-(3, 'admin', '0001_initial', '2019-10-18 02:35:38.923909'),
-(4, 'admin', '0002_logentry_remove_auto_add', '2019-10-18 02:35:39.022572'),
-(5, 'admin', '0003_logentry_add_action_flag_choices', '2019-10-18 02:35:39.039479'),
-(6, 'aps', '0001_initial', '2019-10-18 02:35:39.077379'),
-(7, 'contenttypes', '0002_remove_content_type_name', '2019-10-18 02:35:39.161190'),
-(8, 'auth', '0002_alter_permission_name_max_length', '2019-10-18 02:35:39.175151'),
-(9, 'auth', '0003_alter_user_email_max_length', '2019-10-18 02:35:39.193069'),
-(10, 'auth', '0004_alter_user_username_opts', '2019-10-18 02:35:39.205037'),
-(11, 'auth', '0005_alter_user_last_login_null', '2019-10-18 02:35:39.247052'),
-(12, 'auth', '0006_require_contenttypes_0002', '2019-10-18 02:35:39.252007'),
-(13, 'auth', '0007_alter_validators_add_error_messages', '2019-10-18 02:35:39.265007'),
-(14, 'auth', '0008_alter_user_username_max_length', '2019-10-18 02:35:39.279931'),
-(15, 'auth', '0009_alter_user_last_name_max_length', '2019-10-18 02:35:39.296887'),
-(16, 'auth', '0010_alter_group_name_max_length', '2019-10-18 02:35:39.311054'),
-(17, 'auth', '0011_update_proxy_permissions', '2019-10-18 02:35:39.320823'),
-(18, 'sessions', '0001_initial', '2019-10-18 02:35:39.347750'),
-(19, 'django_x509', '0001_initial', '2019-10-18 06:15:02.638869'),
-(20, 'django_x509', '0002_certificate', '2019-10-18 06:15:02.675815'),
-(21, 'django_x509', '0003_rename_organization_field', '2019-10-18 06:15:02.691729'),
-(22, 'django_x509', '0004_auto_20171207_1450', '2019-10-18 06:15:02.746581'),
-(23, 'django_x509', '0005_organizational_unit_name', '2019-10-18 06:15:02.774562'),
-(24, 'aps', '0002_masterkey', '2019-10-24 05:48:42.382957'),
-(25, 'aps', '0003_auto_20191024_1257', '2019-10-24 05:59:25.891353'),
-(26, 'aps', '0004_master', '2019-10-24 05:59:25.905494'),
-(27, 'aps', '0005_auto_20191024_1303', '2019-10-24 06:03:27.855716');
+(1, 'contenttypes', '0001_initial', '2019-11-01 07:47:05.884295'),
+(2, 'auth', '0001_initial', '2019-11-01 07:47:06.240404'),
+(3, 'aps', '0001_initial', '2019-11-01 07:47:06.358102'),
+(4, 'admin', '0001_initial', '2019-11-01 07:48:10.287173'),
+(5, 'admin', '0002_logentry_remove_auto_add', '2019-11-01 07:48:10.296126'),
+(6, 'admin', '0003_logentry_add_action_flag_choices', '2019-11-01 07:48:10.303140'),
+(7, 'contenttypes', '0002_remove_content_type_name', '2019-11-01 07:48:10.344996'),
+(8, 'auth', '0002_alter_permission_name_max_length', '2019-11-01 07:48:10.354481'),
+(9, 'auth', '0003_alter_user_email_max_length', '2019-11-01 07:48:10.366479'),
+(10, 'auth', '0004_alter_user_username_opts', '2019-11-01 07:48:10.373465'),
+(11, 'auth', '0005_alter_user_last_login_null', '2019-11-01 07:48:10.398602'),
+(12, 'auth', '0006_require_contenttypes_0002', '2019-11-01 07:48:10.400603'),
+(13, 'auth', '0007_alter_validators_add_error_messages', '2019-11-01 07:48:10.408575'),
+(14, 'auth', '0008_alter_user_username_max_length', '2019-11-01 07:48:10.422538'),
+(15, 'auth', '0009_alter_user_last_name_max_length', '2019-11-01 07:48:10.434506'),
+(16, 'django_x509', '0001_initial', '2019-11-01 07:48:10.547302'),
+(17, 'django_x509', '0002_certificate', '2019-11-01 07:48:10.593181'),
+(18, 'django_x509', '0003_rename_organization_field', '2019-11-01 07:48:10.612133'),
+(19, 'django_x509', '0004_auto_20171207_1450', '2019-11-01 07:48:10.662371'),
+(20, 'django_x509', '0005_organizational_unit_name', '2019-11-01 07:48:10.688302'),
+(21, 'sessions', '0001_initial', '2019-11-01 07:48:10.713238');
 
 -- --------------------------------------------------------
 
@@ -364,18 +326,6 @@ CREATE TABLE `django_session` (
   `session_data` longtext NOT NULL,
   `expire_date` datetime(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `django_session`
---
-
-INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('ceqptfxgpb2tp8e4cfqdlynywk3ekzx1', 'NjZjNmNiOTRhZDQwY2E2OTk2YWQwY2FkNzllNmZhYzhiNjA5ZDA4MDp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwODM4MmNkYjk0YWYzNDZiNDBmZDcxNzAxNDc3YjcwZTdlZmRiODA5In0=', '2019-11-07 06:00:49.816369'),
-('i16m0oelp7r42fhvqyc1f1ca4jgj6e46', 'MTIxNjJlYmYyNzJlYmE5M2U5ZDYzOGM1YzNmNzZlYmEzNmMxOGEwNzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJmYTg1MjI4ZmI4ZjQzMTQ5MmQxNTFjZTgxYjI2NDRhNDhiZjUyYTk5In0=', '2019-11-01 08:16:19.816231'),
-('l3jwcm95fn1cc9ofkrmdx6erc0dxodue', 'ZGVlYjZmZGY2ZGM2ZjU2ZjYzMjFmZWY3MzlhYjkyMWUzYjNmMDQzYTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwNjZmZTUzYjA0NWQ5NWQ5OTA5YjkzZmMzNmMyYTFiMjAwODNlOGVlIn0=', '2019-11-04 03:14:56.858564'),
-('pmat913k4gx975gttqesb0yyjh2gj6dh', 'MTIxNjJlYmYyNzJlYmE5M2U5ZDYzOGM1YzNmNzZlYmEzNmMxOGEwNzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJmYTg1MjI4ZmI4ZjQzMTQ5MmQxNTFjZTgxYjI2NDRhNDhiZjUyYTk5In0=', '2019-11-04 09:16:27.051789'),
-('sytxlt0r8osvv6r4snz7mifcg50iekio', 'MTIxNjJlYmYyNzJlYmE5M2U5ZDYzOGM1YzNmNzZlYmEzNmMxOGEwNzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJmYTg1MjI4ZmI4ZjQzMTQ5MmQxNTFjZTgxYjI2NDRhNDhiZjUyYTk5In0=', '2019-11-04 02:29:58.663392'),
-('w8p9i38bpwnkrfqd7335kn5nu6n5kprb', 'MTIxNjJlYmYyNzJlYmE5M2U5ZDYzOGM1YzNmNzZlYmEzNmMxOGEwNzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJmYTg1MjI4ZmI4ZjQzMTQ5MmQxNTFjZTgxYjI2NDRhNDhiZjUyYTk5In0=', '2019-11-04 00:59:08.746675');
 
 -- --------------------------------------------------------
 
@@ -405,6 +355,13 @@ CREATE TABLE `django_x509_ca` (
   `modified` datetime(6) NOT NULL,
   `organizational_unit_name` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `django_x509_ca`
+--
+
+INSERT INTO `django_x509_ca` (`id`, `name`, `notes`, `key_length`, `digest`, `validity_start`, `validity_end`, `country_code`, `state`, `city`, `organization_name`, `email`, `common_name`, `extensions`, `serial_number`, `certificate`, `private_key`, `created`, `modified`, `organizational_unit_name`) VALUES
+(1, 'user1', 'tes', '2048', 'sha256', '2019-10-31 00:00:00.000000', '2022-10-29 07:49:54.000000', '', '', '', '', '', '', '[]', '74616606903887689493014937557089154360', '-----BEGIN CERTIFICATE-----\nMIIDDDCCAfSgAwIBAgIQOCKiwRFKSvS9qDiJP1B1ODANBgkqhkiG9w0BAQsFADAA\nMCIYDzIwMTkxMDMxMDAwMDAwWhgPMjAyMjEwMjkwNzQ5NTRaMAAwggEiMA0GCSqG\nSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDWpqA0NviNhA2hpakq0dYaU5Iwie/UjouT\nLewrJmS5BcNbJFoozJj8SJ7M6t6W38PWFS1WqaY96UproPR87VDyoYd75c++hAnd\nA87RnktQ2TD+mBcxEJNF8zdY0sucYxhhtUQTe4lW0DxCyY4drXhzI6frJkc7V1Nd\nPS7nPETt74SIJ8oELK4SK/LWFEgR8NgmhOzIb3sdbcHkJE1KG0YOSCgiDO+xa5dQ\nsUO2UxYhdYwJNiW+tdur6hEBwHZTXO6Zv4228HSwFw7JxUHJizH4eSJa2pY2K97g\nEia9nH4FgnHGFdOlK3iFBtKD18LebY3QWJeNgL9O7VY4hsV3OwZLAgMBAAGjfjB8\nMBIGA1UdEwEB/wQIMAYBAf8CAQAwDgYDVR0PAQH/BAQDAgEGMB0GA1UdDgQWBBQ2\nH0iGw8cCVqC9aHbGPGU6qMcWgjA3BgNVHSMEMDAugBQ2H0iGw8cCVqC9aHbGPGU6\nqMcWgqEEpAIwAIIQOCKiwRFKSvS9qDiJP1B1ODANBgkqhkiG9w0BAQsFAAOCAQEA\nAkQdAgLNBCaEgngOXFUP2tiwHO+Pesb1L/yXMi3fbzE7qrWybD2YHDB8oc8fXcZA\n0QMtNEwSlA3/R58b/z3kVa2Z9XoOPjavfY9QfHjSUjj8arrKzw3XIy/lJHextWKH\n14H4vMYq74gZ20ayXsjQvPROxB1d1KPIcyT8DgmDTmT57VQJXtdP//+J8/CfgIna\nbf0wHX8INcit/fTcseNg1klAGXdtsaBmVQyXOSH2Mr/yqLeT57Vde27+Us8eozAP\nLQtTf5m5qlCbTQbuonFO+fqVGtw7KBuG4C+M9QmK9DClPa7FrsyTwl3a/ISvzQbK\n1+Jg6qGmFHyyYCyxRIqvSA==\n-----END CERTIFICATE-----\n', '-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDWpqA0NviNhA2h\npakq0dYaU5Iwie/UjouTLewrJmS5BcNbJFoozJj8SJ7M6t6W38PWFS1WqaY96Upr\noPR87VDyoYd75c++hAndA87RnktQ2TD+mBcxEJNF8zdY0sucYxhhtUQTe4lW0DxC\nyY4drXhzI6frJkc7V1NdPS7nPETt74SIJ8oELK4SK/LWFEgR8NgmhOzIb3sdbcHk\nJE1KG0YOSCgiDO+xa5dQsUO2UxYhdYwJNiW+tdur6hEBwHZTXO6Zv4228HSwFw7J\nxUHJizH4eSJa2pY2K97gEia9nH4FgnHGFdOlK3iFBtKD18LebY3QWJeNgL9O7VY4\nhsV3OwZLAgMBAAECggEAH7HY4/zd9J90F9NLSFxVneuLIYmslRk7OM9GGRUBOGTG\ndNXITk/vowjiEeX4WhTOaPUVjb9dIbUp3PyWPUAZfMonJD9JzprWjgD67+7MtjJr\nzpwMiJ0m8eQ43u+5Su1C82J9m9bY762tyDrUtkMgDvhL2if7yqJZV+Ip49D9aJh5\nD5zS7tvp631lqNCi9/jOq/1audcw+ZolHVE/lOPXpbgnn4mPFCH8yWOdSz02LRuG\nZrsJjM4ENFD9b8NNCjGF2/2uwnfYLYU5ovf3jpJGWJy2rpkYbD30BYaNJgUic5bv\n8OhgIozwHyieVo/2iwWwct5S1/rK6Z0jRcQOOm2fqQKBgQD1YytRG+EGT0BIaEZ9\ndFnQ3LLmOgOk9JLpNy48Wl5TNGf02Vcv15EF/9q580vuQGfOpWsk0lbMm6MBPTjm\nAr0vdwbL/mQFy6PC4HtL1c9ZMaYTOfnmofvsBFlNyj56DzVukLfKXep9vzJY4z8E\n8z+2CtPgnToQPzcy9Rodqx7kFwKBgQDf7yeGl77lme8nXilUZp+b8QMUac94EQQm\nOlnNXjorgHA8ZHt6+MA4mpvlnZuiP8TDz737BzUnmsL7HQARsNL2CqJAJJKbPzR9\nS/K59y1kP2cC3yuvCnSQinBRYf4Nd3D6AaP0TUiUp+q1znXzkZkactPmhayW3wit\nwVAIKH4r7QKBgF8Csb/q2nrV7p7aeQiUJz5+ZWpM5iJVbBiOfAF0P/dZYDLmgCKP\nBaDcCrVa5XhvSYIyfES6iE8ap8eQC9rLDrM1E9WiPtobmeGXh0W6mFkBpzrkhMTu\nzRr6KBW9i+k4wEh6Eh9xs5xSjkzqV/kzseRrVtQuLFAkGdxKGH2KRyCrAoGASsFV\nmpLRwWgv9B51AZ34rmA4vPnNrrFPh0t3ax2HoboQvbh1mEmuMbc7T93bdMCA+TVC\noKh5UC1T5ex6d21mH4jRPUR4RKdG6IUQFJC1cH/R7Z1+wcJlw1LTx/dEjk5PQsaF\nayrZjfa4XdT8f0EdsTygDJaXVQ5DoW2lP/P0mskCgYAPqC1AyulZquCWj9WgkltZ\ndrg285qmKiTNVQkLETvQWNJgyI7lnM9x0WhCC5ib8Lnyc48oSYjLxPdLNtBU/pQF\nw6G7Q05EJaUpmJT1NNcZk0r3lLSnogOBZnGgWwdi7zxbnse+Dk8HeZuizVW0st3o\ncT9SXBYB0yvbAnik+2cAcA==\n-----END PRIVATE KEY-----\n', '2019-11-01 07:50:41.556692', '2019-11-01 07:50:41.647952', '');
 
 -- --------------------------------------------------------
 
@@ -441,25 +398,26 @@ CREATE TABLE `django_x509_cert` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `masterkey`
+-- Table structure for table `mainkey`
 --
 
-CREATE TABLE `masterkey` (
+CREATE TABLE `mainkey` (
   `no` int(11) NOT NULL,
   `id` varchar(100) NOT NULL,
-  `kunci` longtext NOT NULL
+  `key_name` longtext NOT NULL,
+  `time_start` time(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `masterkey`
---
-
-INSERT INTO `masterkey` (`no`, `id`, `kunci`) VALUES
-(1, '2', 'gAAAAABdsUMI47--KvjZl9PSQWSrZ5uHVi9aidTYZ6mmYp5_mO6mQd0NAc4HiM17WpTKvC5_z63_9FyE8CTQAJGloZFET-Ni5w==');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `aps_profile`
+--
+ALTER TABLE `aps_profile`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `aps_userprofileinfo`
@@ -555,14 +513,20 @@ ALTER TABLE `django_x509_cert`
   ADD UNIQUE KEY `django_x509_cert_ca_id_serial_number_32257b8b_uniq` (`ca_id`,`serial_number`);
 
 --
--- Indexes for table `masterkey`
+-- Indexes for table `mainkey`
 --
-ALTER TABLE `masterkey`
+ALTER TABLE `mainkey`
   ADD PRIMARY KEY (`no`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `aps_profile`
+--
+ALTER TABLE `aps_profile`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `aps_userprofileinfo`
@@ -574,31 +538,31 @@ ALTER TABLE `aps_userprofileinfo`
 -- AUTO_INCREMENT for table `auth_group`
 --
 ALTER TABLE `auth_group`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `auth_group_permissions`
 --
 ALTER TABLE `auth_group_permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `auth_user_groups`
 --
 ALTER TABLE `auth_user_groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `auth_user_user_permissions`
@@ -610,25 +574,25 @@ ALTER TABLE `auth_user_user_permissions`
 -- AUTO_INCREMENT for table `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `django_x509_ca`
 --
 ALTER TABLE `django_x509_ca`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `django_x509_cert`
@@ -637,14 +601,20 @@ ALTER TABLE `django_x509_cert`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `masterkey`
+-- AUTO_INCREMENT for table `mainkey`
 --
-ALTER TABLE `masterkey`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `mainkey`
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `aps_profile`
+--
+ALTER TABLE `aps_profile`
+  ADD CONSTRAINT `aps_profile_user_id_49cfd8df_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
 
 --
 -- Constraints for table `aps_userprofileinfo`
