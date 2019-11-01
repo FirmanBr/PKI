@@ -14,5 +14,6 @@ urlpatterns=[
     url(r'^master_key/$',views.master_key,name='master_key'),
     url(r'^rotate_key_master/$',views.rotate_key_master,name='rotate_key_master'),
     url(r'^delete_key_master/$',views.delete_key_master,name='delete_key_master'),
+    url(r'^requestcsca/$',views.requestcsca,name='requestcsca'),
 ]
 

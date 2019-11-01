@@ -306,6 +306,7 @@ def rotate_key_master(request) :
         pyautogui.alert('Rotete Key Failed')  
         return render(request, 'aps/list_key.html') 
 
+@login_required
 def delete_key_master(request) :
     if request.method == 'POST':
         keyname = request.POST.get('keydelete')
@@ -320,6 +321,10 @@ def delete_key_master(request) :
     else :
         pyautogui.alert('Delete Keys Key Failed')  
         return render(request, 'aps/list_key.html') 
+
+@login_required
+def requestcsca(request):
+    return render(request, 'aps/requestcsca.html') 
 
 
         
