@@ -5,11 +5,46 @@
   <div class="jumbotron">
     <h5>
       <p align ="center">
-      
-        {{ tablekey.id }}
+
+      <table class="table">
+        <thead>
+            <tr>
+                <th class="text-center" scope="col">ID</th>
+                <th class="text-center" scope="col">Key Name</th>
+                <th class="text-center" scope="col">Time Start</th>
+                <th class="text-center" scope="col">Rotate Key</th>
+                <th class="text-center" scope="col">Delete Key</th>
+            </tr>
+        </thead>  
+        <tbody>
+        {% for hasil in test %}
+
+            <tr>
+                <th class="text-center" scope="row">{{ hasil.id }} </th>
+                <td class="text-center" >{{ hasil.key_name }}</td>
+                <td class="text-center">{{ hasil.time_start }}</td>
+                <td class="text-center">
+                <form method="post" action="{% url 'aps:rotate_key_master' %}" >
+                    {% csrf_token %}
+                    <input hidden type ="text" id ="keyname" name = "keyname" value = "{{ hasil.key_name }}">
+                    <button type="submit" class="btn btn-warning">V</button>
+                </form>                
+                </td>
+                <td class="text-center">
+                <form method="post" action="{% url 'aps:delete_key_master' %}" >
+                    {% csrf_token %}
+                    <input hidden type ="text" id ="keydelete" name = "keydelete" value = "{{ hasil.key_name }}">
+                    <button type="submit" class="btn btn-delete">V</button>
+                </form>   
+                </td>
+            </tr>    
+        {% endfor %}             
+        </tbody>
+    </table>
       </p>
     </h5>
  </div>    
 </div> 
 
 {% endblock %}
+

@@ -60,6 +60,21 @@
           {% endif %}
 
           {% if user.is_authenticated %}
+            {% if user.profile.role == 1 %}
+              <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Key Log <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Country Signing CA</a></li>
+                    <li><a href="#">Document Signers</a></li>
+                    <li><a href="#">Inspection Systems</a></li>
+                    <li><a href="#">Master List Signers</a></li>
+                    <li><a href="#">Document List Signers</a></li>
+                  </ul>
+              </li>
+            {% endif %}
+          {% endif %}
+
+          {% if user.is_authenticated %}
             {% if user.profile.role == 10 %}
               <li class="dropdown">
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">Pair Key <b class="caret"></b></a>

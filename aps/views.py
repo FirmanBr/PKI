@@ -14,6 +14,7 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives import serialization
 from .models import mainkey,Profile
 
+
 import base64
 import datetime
 import hvac
@@ -222,6 +223,7 @@ def master_key_submit(request):
             nik = request.POST.get('id')
             keyname = request.POST.get('keyname')
 
+
             client.secrets.transit.create_key(name=keyname)
 
             client.secrets.transit.update_key_configuration(
@@ -288,8 +290,37 @@ def user_login(request):
 @login_required
 def list_key(request):
 
+    test = mainkey.objects.all()
+    context = {'test': test}
 
-    return render(request, 'aps/list_key.html')  
+    return render(request, 'aps/list_key.html', context)  
+
+@login_required
+def rotate_key_master(request) :
+    if request.method == 'POST':
+        keyname = request.POST.get('keyname')
+        client.secrets.transit.rotate_key(name=keyname)
+        pyautogui.alert('Rotete Key Sucess') 
+        return render(request, 'aps/index.html') 
+    else :
+        pyautogui.alert('Rotete Key Failed')  
+        return render(request, 'aps/list_key.html') 
+
+def delete_key_master(request) :
+    if request.method == 'POST':
+        keyname = request.POST.get('keydelete')
+        cursor = db.cursor(buffered=True)
+        sql1 = """Delete from mainkey where key_name = %s"""
+        val = keyname
+        cursor.execute(sql1,(val,))
+        db.commit()
+        client.secrets.transit.delete_key(name=keyname)
+        pyautogui.alert('Delete Key Sucess') 
+        return render(request, 'aps/index.html') 
+    else :
+        pyautogui.alert('Delete Keys Key Failed')  
+        return render(request, 'aps/list_key.html') 
+
 
         
         
