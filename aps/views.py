@@ -14,18 +14,23 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives import serialization
 from .models import mainkey,Profile
 
-import mysql.connector
-import pyautogui
-import time
+import base64
 import datetime
 import hvac
+import mysql.connector
+import pyautogui
 import pybase64
 import sys
-import base64
+import time
+
+
+
+
 
 db = mysql.connector.connect(host='localhost',database='pkilen',user='root',password='')
 key = Fernet.generate_key()
 f = Fernet(key)
+
 client = hvac.Client(url='http://127.0.0.1:8200')
 
 auth = Profile.objects.all()
@@ -218,8 +223,9 @@ def master_key_submit(request):
             keyname = request.POST.get('keyname')
 
             client.secrets.transit.create_key(name=keyname)
+
             client.secrets.transit.update_key_configuration(
-                name=keyname,
+                name=keyname,                
                 deletion_allowed=True,
                 exportable=True,
             )
@@ -278,6 +284,12 @@ def user_login(request):
             return render(request, 'aps/login.html', {})
     else:
         return render(request, 'aps/login.html', {})
+
+@login_required
+def list_key(request):
+
+
+    return render(request, 'aps/list_key.html')  
 
         
         
