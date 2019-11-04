@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2019 at 10:22 AM
+-- Generation Time: Nov 04, 2019 at 04:30 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.8
 
@@ -178,8 +178,8 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$120000$3TBeeO7sy4ah$VEXZ8W5rnRyOyI40Mc9OnhfLKLzSe4qIaO6OER7XR1A=', '2019-11-01 07:51:20.199824', 1, 'user1', '', '', 'firmanbrilian@gmail.com', 1, 1, '2019-11-01 07:49:10.000000'),
-(2, 'pbkdf2_sha256$120000$effgvnQvkJVW$NqwR0lssU9bOrGT6I+nZBBDQKkKhxeGdFWaGvJMEFe0=', '2019-11-01 07:59:18.384605', 0, 'user2', '', '', '', 0, 1, '2019-11-01 07:57:19.000000'),
+(1, 'pbkdf2_sha256$120000$3TBeeO7sy4ah$VEXZ8W5rnRyOyI40Mc9OnhfLKLzSe4qIaO6OER7XR1A=', '2019-11-04 02:33:11.880350', 1, 'user1', '', '', 'firmanbrilian@gmail.com', 1, 1, '2019-11-01 07:49:10.000000'),
+(2, 'pbkdf2_sha256$120000$effgvnQvkJVW$NqwR0lssU9bOrGT6I+nZBBDQKkKhxeGdFWaGvJMEFe0=', '2019-11-04 01:00:01.087143', 0, 'user2', '', '', '', 0, 1, '2019-11-01 07:57:19.000000'),
 (3, 'pbkdf2_sha256$120000$xwqnRF5JUMl7$CKsFC6Ha/ajZqYb3HWxGzirYbmU9cwkq2oIYVdgBc/o=', NULL, 0, 'user3', '', '', '', 0, 1, '2019-11-01 07:57:31.000000'),
 (4, 'pbkdf2_sha256$120000$w6DGeextnGus$iBx164rRrL+35une5Vzxtz9fPDj2kIkwlYpZNS0Vixg=', NULL, 0, 'user4', '', '', '', 0, 1, '2019-11-01 07:57:41.000000'),
 (5, 'pbkdf2_sha256$120000$PyvDLIVtFAWx$zEVBexKBNupanZVHzM5wU1qacO5qs+N5F9Pmvd3wfMU=', NULL, 0, 'user5', '', '', '', 0, 1, '2019-11-01 07:57:50.000000'),
@@ -326,6 +326,14 @@ CREATE TABLE `django_session` (
   `session_data` longtext NOT NULL,
   `expire_date` datetime(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `django_session`
+--
+
+INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+('lenertybvwwo71ce2pij5ns7cz6qaodn', 'MjczNjllNzI0OTZmYTcxZmI0NDlhNmRkNWY1YTU2OTVjZDBmZjA0OTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIyMmJjYjVjMTQ2MmIzZGJkNTZhMWMzMmVlZGIzNzM3NmFlMzNlM2Q1In0=', '2019-11-18 01:55:47.963760'),
+('wfvzypxa2d64xqjqegmsu2bi6poz31x7', 'MjczNjllNzI0OTZmYTcxZmI0NDlhNmRkNWY1YTU2OTVjZDBmZjA0OTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIyMmJjYjVjMTQ2MmIzZGJkNTZhMWMzMmVlZGIzNzM3NmFlMzNlM2Q1In0=', '2019-11-18 02:33:11.887362');
 
 -- --------------------------------------------------------
 
