@@ -1,0 +1,72 @@
+{% extends 'aps/base.html' %}
+{% block body_block %}
+
+  <div class="container">
+    <div class="jumbotron">
+      <h3 align="center"> </h3>
+
+      <div>
+      </div>
+
+      <form method="post"action="{% url 'aps:validkeysubmit' %}">
+        {% csrf_token %}
+
+        <div class="form-group row">
+          <label class="form-label col-md-3" for="cscakey">CKMS</label>
+            <div class="col-md-9">
+                <input checked type="radio" class="form-control-sm" name="cscakey" id="cscakey" style="height:20px; width:20px; vertical-align: middle;" value="enable"> Enable
+            </div>
+        </div>           
+
+        <div class="form-group row">
+          <label class="form-label col-md-3" for="cscakey">Public Key Infrastructure</label>
+            <div class="col-md-9">
+                <input checked type="radio" class="form-control-sm" name="pki" id="pki" style="height:20px; width:20px; vertical-align: middle;" value="enable"> Enable
+            </div>
+        </div>        
+
+        <div class="form-group row">
+            <div class="col-md-9">
+              <input type="hidden" name="validitykeys"
+                maxlength="255"
+                class="form-control form-control-sm"
+                placeholder="Username" title="" required="" value="365h"
+                id="validitykeys">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-9">
+              <input type="hidden" name="issuing_certificates"
+                maxlength="255"
+                class="form-control form-control-sm"
+                title="" required="" value="http://127.0.0.1:8200/v1/pki/ca"
+                id="issuing_certificates">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-9">
+              <input type="hidden" name="crlurl"
+                maxlength="255"
+                class="form-control form-control-sm"
+                title="" required="" value="http://127.0.0.1:8200/v1/pki/crl"
+                id="crlurl">
+            </div>
+        </div>        
+
+        <div class="row">
+          <div class="col-12 text-center">
+            <div class="form-group">
+              <button type="submit" class="form-button btn btn-success btn pull-right" >
+              GENERATE
+              </button>
+            </div>
+          </div>
+        </div>
+        
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

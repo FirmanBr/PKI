@@ -327,6 +327,47 @@ def requestcsca(request):
 
     return render(request, 'aps/requestcsca.html') 
 
+@login_required
+def validkey(request):
+
+    return render(request, 'aps/validkey.html')    
+
+@login_required
+def validkeysubmit(request):
+    if request.method == 'POST':
+        
+        client.sys.enable_secrets_engine(
+            backend_type='transit',
+            path='transit',
+
+        )
+
+        client.sys.enable_secrets_engine(
+            backend_type='pki',
+            path='pki',
+        )
+        set_crl_configuration_response = client.secrets.pki.set_crl_configuration(
+            expiry='365h',
+            disable=False
+        )        
+
+        set_urls_response = client.secrets.pki.set_urls(
+            {
+            'issuing_certificates': ['http://127.0.0.1:8200/v1/pki/ca'],
+            'crl_distribution_points': ['http://127.0.0.1:8200/v1/pki/crl']
+            }
+        )
+
+        pyautogui.alert('Configure Sucessfull') 
+        return render(request, 'aps/index.html') 
+
+    else :
+        pyautogui.alert('failed') 
+        return render(request, 'aps/index.html') 
+
+
+
+
 
         
         

@@ -49,9 +49,14 @@
 
           {% if user.is_authenticated %}
             {% if user.profile.role == 1 %}
-              <li><a class="navbar-link" href="#">Activate Vault</a></li> 
+              <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Vault Setting <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="{% url 'aps:validkey'%}">Configuration</a></li>
+                  </ul>
+              </li>
             {% endif %}
-          {% endif %}  
+          {% endif %}
 
           {% if user.is_authenticated %}
             {% if user.profile.role == 1 %}
