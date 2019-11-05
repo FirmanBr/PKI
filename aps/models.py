@@ -52,59 +52,19 @@ class mainkey(models.Model):
     def __str__(self):
       return self.kunci
 
-class DjangoX509Ca(models.Model):
-    name = models.CharField(max_length=64)
-    notes = models.TextField()
-    key_length = models.CharField(max_length=6)
-    digest = models.CharField(max_length=8)
-    validity_start = models.DateTimeField(blank=True, null=True)
-    validity_end = models.DateTimeField(blank=True, null=True)
-    country_code = models.CharField(max_length=2)
-    state = models.CharField(max_length=64)
-    city = models.CharField(max_length=64)
-    organization_name = models.CharField(max_length=64)
-    email = models.CharField(max_length=254)
-    common_name = models.CharField(max_length=63)
-    extensions = models.TextField()
-    serial_number = models.CharField(max_length=39, blank=True, null=True)
-    certificate = models.TextField()
-    private_key = models.TextField()
-    created = models.DateTimeField()
-    modified = models.DateTimeField()
-    organizational_unit_name = models.CharField(max_length=64)
-
-    class Meta:
-        managed = False
-        db_table = 'django_x509_ca'
+class PairKeyReq(models.Model):
+    no = models.AutoField(primary_key=True)
+    masterkey = models.CharField(max_length=100)
+    negara = models.CharField(max_length=100)
+    kota = models.CharField(max_length=100)
+    provinsi = models.CharField(max_length=100)            
+    jalan = models.CharField(max_length=100)
+    pos = models.CharField(max_length=100)
+    status = models.CharField(max_length=10,null=True)    
 
 
-class DjangoX509Cert(models.Model):
-    name = models.CharField(max_length=64)
-    notes = models.TextField()
-    key_length = models.CharField(max_length=6)
-    digest = models.CharField(max_length=8)
-    validity_start = models.DateTimeField(blank=True, null=True)
-    validity_end = models.DateTimeField(blank=True, null=True)
-    country_code = models.CharField(max_length=2)
-    state = models.CharField(max_length=64)
-    city = models.CharField(max_length=64)
-    organization_name = models.CharField(max_length=64)
-    email = models.CharField(max_length=254)
-    common_name = models.CharField(max_length=63)
-    extensions = models.TextField()
-    serial_number = models.CharField(max_length=39, blank=True, null=True)
-    certificate = models.TextField()
-    private_key = models.TextField()
-    created = models.DateTimeField()
-    modified = models.DateTimeField()
-    revoked = models.IntegerField()
-    revoked_at = models.DateTimeField(blank=True, null=True)
-    ca = models.ForeignKey(DjangoX509Ca, models.DO_NOTHING)
-    organizational_unit_name = models.CharField(max_length=64)
 
-    class Meta:
-        managed = False
-        db_table = 'django_x509_cert'
-        unique_together = (('ca', 'serial_number'),)
+
+
 
     

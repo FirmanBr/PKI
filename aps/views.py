@@ -347,7 +347,7 @@ def validkeysubmit(request):
             path='pki',
         )
         set_crl_configuration_response = client.secrets.pki.set_crl_configuration(
-            expiry='365h',
+            expiry='1095h',
             disable=False
         )        
 
