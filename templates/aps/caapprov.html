@@ -6,7 +6,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th class="text-center" scope="col">ID</th>
+                    <th class="text-center" scope="col">Nama Master Key</th>
                     <th class="text-center" scope="col">Negara</th>
                     <th class="text-center" scope="col">Provinsi</th>                    
                     <th class="text-center" scope="col">Kota</th>
@@ -19,7 +19,7 @@
             <tbody>
                 {% for kunci in pairkey %}
                     <tr>
-                        <th class="text-center" scope="row">{{ kunci.no }} </th>
+                        <th class="text-center" scope="row">{{ kunci.masterkey }} </th>
                         <th class="text-center" scope="row">{{ kunci.negara }} </th>
                         <th class="text-center" scope="row">{{ kunci.provinsi }} </th>
                         <th class="text-center" scope="row">{{ kunci.kota }} </th>    
@@ -27,15 +27,15 @@
                         <th class="text-center" scope="row">{{ kunci.pos }} </th>       
                         <th class="text-center" scope="row">{{ kunci.organization }} </th> 
                         <th class="text-center">
-                            <form>
-                                {% if kunci.status == '0' %}  
+                            {% if kunci.status == '0' %}  
+                                <form>
                                     <button type="submit" class="btn btn-warning">O</button>
-                                {% elif kunci.status == '1' %}   
-                                    <button type="submit" class="btn btn-primary">V</button>
-                                {% else %}    
-                                    <button type="submit" class="btn btn-danger">X</button>  
-                                {% endif %}    
-                            </form> 
+                                </form>    
+                            {% elif kunci.status == '1' %}   
+                                <button type="submit" class="btn btn-primary">V</button>    
+                            {% else %}    
+                                <button type="submit" class="btn btn-danger">X</button>  
+                            {% endif %}    
                         </th>                                                                                                                                   
                     </tr>    
                 {% endfor %}             
