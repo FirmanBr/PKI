@@ -16,6 +16,8 @@ urlpatterns=[
     url(r'^validkeysubmit/$',views.validkeysubmit,name='validkeysubmit'),
     url(r'^rotate_key_master/$',views.rotate_key_master,name='rotate_key_master'),
     url(r'^delete_key_master/$',views.delete_key_master,name='delete_key_master'),
+    url(r'^requestkey/$',views.requestkey,name='requestkey'),
+    url(r'^caapprov/$',views.caapprov,name='caapprov'),    
     url(r'^requestcsca/$',views.requestcsca,name='requestcsca'),
 ]
 

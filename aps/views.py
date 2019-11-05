@@ -12,7 +12,7 @@ from cryptography.hazmat.primitives.asymmetric import dsa
 from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives import serialization
-from .models import mainkey,Profile
+from .models import mainkey,Profile,PairKeyReq
 
 
 import base64
@@ -23,10 +23,6 @@ import pyautogui
 import pybase64
 import sys
 import time
-
-
-
-
 
 db = mysql.connector.connect(host='localhost',database='pki',user='root',password='')
 key = Fernet.generate_key()
@@ -325,7 +321,9 @@ def delete_key_master(request) :
 @login_required
 def requestcsca(request):
 
-    return render(request, 'aps/requestcsca.html') 
+    test = mainkey.objects.all()[:1]
+    context = {'test': test}
+    return render(request, 'aps/requestcsca.html', context) 
 
 @login_required
 def validkey(request):
@@ -365,8 +363,42 @@ def validkeysubmit(request):
         pyautogui.alert('failed') 
         return render(request, 'aps/index.html') 
 
+@login_required
+def requestkey(request):
+        if request.method == 'POST':
+            jenis           = 'exported'
+            bits            = '2048'
+            masterkey       = request.POST.get('masterkey')
+            organization    = request.POST.get('organization')
+            country         = request.POST.get('country')
+            kota            = request.POST.get('kota')
+            provinsi        = request.POST.get('province')
+            jalan           = request.POST.get('address')
+            pos             = request.POST.get('kodepos')
+            status          = '0'
+
+            cursor = db.cursor(buffered=True)
+
+            sql1 = "insert into aps_pairkeyreq(no, masterkey, negara, kota, provinsi, jalan, pos, status, bit,organization,jenis) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            val = ("",masterkey,country,kota,provinsi,jalan,pos,status,bits,organization,jenis)
+
+            cursor.execute(sql1,val)
+            db.commit()
 
 
+            pyautogui.alert('Register succes') 
+            return render(request, 'aps/index.html')   
+        else :  
+            pyautogui.alert('failed') 
+            return render(request, 'aps/index.html')   
+
+@login_required
+def caapprov(request):
+ 
+    pairkey = PairKeyReq.objects.all()
+    createkey = {'pairkey': pairkey} 
+
+    return render(request, 'aps/caapprov.html', createkey) 
 
 
         

@@ -55,12 +55,15 @@ class mainkey(models.Model):
 class PairKeyReq(models.Model):
     no = models.AutoField(primary_key=True)
     masterkey = models.CharField(max_length=100)
+    organization = models.CharField(max_length=100,null=True)
     negara = models.CharField(max_length=100)
     kota = models.CharField(max_length=100)
     provinsi = models.CharField(max_length=100)            
     jalan = models.CharField(max_length=100)
     pos = models.CharField(max_length=100)
-    status = models.CharField(max_length=10,null=True)    
+    status = models.CharField(max_length=10,null=True)        
+    bit = models.FloatField(max_length=100,null=True)   
+    jenis = models.FloatField(max_length=100,null=True)    
 
 
 

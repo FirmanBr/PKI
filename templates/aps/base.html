@@ -72,9 +72,14 @@
 
           {% if user.is_authenticated %}
             {% if user.profile.role == 1 %}
-              <li><a class="navbar-link" href="#">Key Approval </a></li> 
+              <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Key Approval <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="{% url 'aps:caapprov' %}">CA Approval</a></li>
+                  </ul>
+              </li>
             {% endif %}
-          {% endif %}            
+          {% endif %}        
 
           {% if user.is_authenticated %}
             {% if user.profile.role == 1 %}
