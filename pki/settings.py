@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'vaulthelpers',
     'django_dbconn_retry',
     'rest_framework',
+    'bootstrap_modal_forms',
     
 ]
 
