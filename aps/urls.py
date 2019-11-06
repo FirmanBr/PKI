@@ -1,5 +1,7 @@
 from django.conf.urls import url
+from django.urls import path
 from aps import views
+
 
 app_name = 'aps'
 
