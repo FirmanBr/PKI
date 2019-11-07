@@ -1,0 +1,38 @@
+{% extends 'aps/base.html' %}
+{% block body_block %}
+
+  <div class="container">
+    <div class="jumbotron">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="text-center" scope="col">Key Name</th>
+                    <th class="text-center" scope="col">Public Key</th>
+                    <th class="text-center" scope="col">Private Key</th>
+                </tr>
+            </thead>  
+            <tbody>
+                {% for kunci in pairkey %}
+                    <tr>
+                        <th class="text-center" scope="row">
+                            {{ kunci.masterkey }} 
+                        </th>
+                        <th class="text-center" scope="row">
+                            <form action ="http://127.0.0.1:8200/v1/pki/ca">
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-download" ></i> Download</button>    
+                            </form>
+                        </th>
+                        <th class="text-center" scope="row">
+                            <form>
+                                {% csrf_token %}
+                                    <button class="btn btn-primary"><i class="fa fa-download"></i> Download</button>
+                            </form>        
+                        </th>                        
+                    </tr>
+                {% endfor %}   
+            </tbody>         
+        </table>
+    </div>
+  </div>
+
+{% endblock %}      

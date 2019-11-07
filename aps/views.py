@@ -307,11 +307,14 @@ def rotate_key_master(request) :
 def delete_key_master(request) :
     if request.method == 'POST':
         keyname = request.POST.get('keydelete')
+
         cursor = db.cursor(buffered=True)
+        
         sql1 = """Delete from mainkey where key_name = %s"""
         val = keyname
         cursor.execute(sql1,(val,))
         db.commit()
+
         client.secrets.transit.delete_key(name=keyname)
         pyautogui.alert('Delete Key Sucess') 
         return render(request, 'aps/index.html') 
@@ -335,6 +338,9 @@ def validkey(request):
 def validkeysubmit(request):
     if request.method == 'POST':
         
+        issuing_certificates = request.POST.get('issuing_certificates')
+        crlurl = request.POST.get('crlurl')        
+
         client.sys.enable_secrets_engine(
             backend_type='transit',
             path='transit',
@@ -352,8 +358,8 @@ def validkeysubmit(request):
 
         set_urls_response = client.secrets.pki.set_urls(
             {
-            'issuing_certificates': ['http://127.0.0.1:8200/v1/pki/ca'],
-            'crl_distribution_points': ['http://127.0.0.1:8200/v1/pki/crl']
+            'issuing_certificates': [issuing_certificates],
+            'crl_distribution_points': [crlurl]
             }
         )
 
@@ -417,8 +423,8 @@ def keypairca(request):
         status          = request.POST.get('approval')
 
         generate_root_response = client.secrets.pki.generate_root(
-            common_name=masterkey,
             type='exported',
+            common_name=masterkey,
             extra_params=
             {
                 "ttl" : "365h",
@@ -447,4 +453,12 @@ def keypairca(request):
     else:    
         
         pyautogui.alert('failed') 
-        return render(request, 'aps/index.html')          
+        return render(request, 'aps/index.html')    
+
+@login_required
+def listkeyca(request):
+
+    pairkey = PairKeyReq.objects.all()
+    createkey = {'pairkey': pairkey} 
+
+    return render(request, 'aps/listkeyca.html',createkey)         

@@ -20,7 +20,8 @@ urlpatterns=[
     url(r'^delete_key_master/$',views.delete_key_master,name='delete_key_master'),
     url(r'^requestkey/$',views.requestkey,name='requestkey'),
     url(r'^caapprov/$',views.caapprov,name='caapprov'),   
-    url(r'^keypairca/$',views.keypairca,name='keypairca'),    
+    url(r'^keypairca/$',views.keypairca,name='keypairca'),  
+    url(r'^listkeyca/$',views.listkeyca,name='listkeyca'),    
     url(r'^requestcsca/$',views.requestcsca,name='requestcsca'),
 ]
 

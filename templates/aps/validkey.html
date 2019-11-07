@@ -40,7 +40,7 @@
               <input type="hidden" name="issuing_certificates"
                 maxlength="255"
                 class="form-control form-control-sm"
-                title="" required="" value="http://127.0.0.1:8200/v1/pki/ca"
+                title="" required="" value="http://127.0.0.1:8200/v1/pki/{{ user.username }}"
                 id="issuing_certificates">
             </div>
         </div>
@@ -50,7 +50,7 @@
               <input type="hidden" name="crlurl"
                 maxlength="255"
                 class="form-control form-control-sm"
-                title="" required="" value="http://127.0.0.1:8200/v1/pki/crl"
+                title="" required="" value="http://127.0.0.1:8200/v1/pki/crl/{{ user.username }}"
                 id="crlurl">
             </div>
         </div>        
