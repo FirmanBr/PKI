@@ -28,7 +28,7 @@
                         <th class="text-center" scope="row">{{ kunci.organization }} </th> 
                         <th class="text-center">
                             {% if kunci.status == '0' %}  
-                                <button class="btn btn-warning form-control" onClick="editUser({{kunci.masterkey}})" data-toggle="modal" data-target="#myModal")>Approval</button>   
+                                <button class="btn btn-warning form-control open-modal parsing"  data-id ="{{ kunci.masterkey }}" data-ida ="{{ kunci.negara }}" data-idb ="{{ kunci.organization }}" data-idc="{{ kunci.provinsi }}" data-idd="{{ kunci.kota }}" data-ide="{{ kunci.jalan }}" data-idf="{{ kunci.pos }}" data-toggle="modal" data-target="#myModal")>Approval</button>   
                             {% elif kunci.status == '1' %}   
                                 <button type="submit" class="btn btn-primary">V</button>    
                             {% else %}    
@@ -46,22 +46,58 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+          <button type="button" class="close "  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
           <h4 class="modal-title" id="myModalLabel">Approval</h4>
         </div>
 
-        <form action="">
+        <form action="#">
         {% csrf_token %}
 
         <div class="modal-body">
             <input class="form-control" id="form-id" type="hidden" name="formId"/>
             <label for="name">Master Key</label>
-            <input class="form-control" id="masterkey" type="text" name="masterkey" value ="{{ kunci.masterkey }}"/>
+            <input  readonly class="form-control" id="masterkey" type="text" name="masterkey" />
+        </div>
+
+        <div class="modal-body">
+            <input class="form-control" id="form-id" type="hidden" name="formId"/>
+            <label for="name">Perusahaan / Organisasi</label>
+            <input  readonly class="form-control" id="organisasi" type="text" name="organisasi" />
+        </div>
+
+        <div class="modal-body">
+            <input class="form-control" id="form-id" type="hidden" name="formId"/>
+            <label for="name">Negara</label>
+            <input  readonly class="form-control" id="negara" type="text" name="negara" />
+        </div>
+
+        <div class="modal-body">
+            <input class="form-control" id="form-id" type="hidden" name="formId"/>
+            <label for="name">Provinsi</label>
+            <input  readonly class="form-control" id="provinsi" type="text" name="provinsi" />
+        </div>
+
+        <div class="modal-body">
+            <input class="form-control" id="form-id" type="hidden" name="formId"/>
+            <label for="name">Kota</label>
+            <input  readonly class="form-control" id="kota" type="text" name="kota" />
+        </div>
+
+
+        <div class="modal-body">
+            <input class="form-control" id="form-id" type="hidden" name="formId"/>
+            <label for="name">Alamat</label>
+            <input  readonly class="form-control" id="jalan" type="text" name="jalan" />
+        </div>
+
+        <div class="modal-body">
+            <input class="form-control" id="form-id" type="hidden" name="formId"/>
+            <label for="name">Kode POS</label>
+            <input  readonly class="form-control" id="pos" type="text" name="pos" />
         </div>
         
         <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" >Save changes</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" >Generate</button>
         </div>
         </form>
 
@@ -69,7 +105,26 @@
     </div>
   </div>
   
-<script language="javascript" type="text/javascript"> 
+<script type="text/javascript">
+    $(document).on("click", ".parsing", function () {
+     var masterkey = $(this).data('id');
+     var negara = $(this).data('ida');
+     var organisasi = $(this).data('idb');
+     var provinsi = $(this).data('idc');
+     var kota = $(this).data('idd');
+     var jalan = $(this).data('ide');
+     var pos = $(this).data('idf');     
+     $(".modal-body #masterkey").val( masterkey );
+     $(".modal-body #negara").val( negara );
+     $(".modal-body #organisasi").val( organisasi );
+     $(".modal-body #provinsi").val( provinsi );
+     $(".modal-body #kota").val( kota );
+     $(".modal-body #jalan").val( jalan );
+     $(".modal-body #pos").val( pos );                    
+     $('#addBookDialog').modal('show');
+});
+
+    
 
 </script>
 
