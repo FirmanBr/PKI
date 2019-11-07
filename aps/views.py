@@ -377,11 +377,13 @@ def requestkey(request):
             jalan           = request.POST.get('address')
             pos             = request.POST.get('kodepos')
             status          = '0'
+            privkey         = ''
+            pubkey          = ''
 
             cursor = db.cursor(buffered=True)
 
-            sql1 = "insert into aps_pairkeyreq(no, masterkey, negara, kota, provinsi, jalan, pos, status, bit,organization,jenis) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-            val = ("",masterkey,country,kota,provinsi,jalan,pos,status,bits,organization,jenis)
+            sql1 = "insert into aps_pairkeyreq(no, masterkey, negara, kota, provinsi, jalan, pos, status, bit,organization,jenis,privkey,pubkey) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            val = ("",masterkey,country,kota,provinsi,jalan,pos,status,bits,organization,jenis,privkey,pubkey)
 
             cursor.execute(sql1,val)
             db.commit()
@@ -401,6 +403,48 @@ def caapprov(request):
 
     return render(request, 'aps/caapprov.html', createkey) 
 
+@login_required
+def keypairca(request):
+    if request.method == 'POST':
 
+        masterkey       = request.POST.get('masterkey')
+        organization    = request.POST.get('organisasi')
+        country         = request.POST.get('negara')
+        kota            = request.POST.get('provinsi')
+        provinsi        = request.POST.get('kota')
+        jalan           = request.POST.get('jalan')
+        pos             = request.POST.get('pos')
+        status          = request.POST.get('approval')
+
+        generate_root_response = client.secrets.pki.generate_root(
+            common_name=masterkey,
+            type='exported',
+            extra_params=
+            {
+                "ttl" : "365h",
+                "key_type": "rsa",
+                "key_bits": "2048",
+                "organization": organization,
+                "country":country,
+                "locality/city":kota,
+                "province/state":provinsi,
+                "street_address": jalan,
+                "postal_code":pos  
+            } 
+        )
         
+        cursor = db.cursor(buffered=True)
+        sql1 = """ UPDATE aps_pairkeyreq SET status = %s where masterkey = %s """            
+        val = (status,masterkey)
+
+        cursor.execute(sql1,val)
+        db.commit()
+
+
+        pyautogui.alert('Generated Key Successfull') 
+        return render(request, 'aps/index.html')    
+
+    else:    
         
+        pyautogui.alert('failed') 
+        return render(request, 'aps/index.html')          

@@ -50,7 +50,7 @@
           <h4 class="modal-title" id="myModalLabel">Approval</h4>
         </div>
 
-        <form action="#">
+        <form method="post" action="{% url 'aps:keypairca' %}">
         {% csrf_token %}
 
         <div class="modal-body">
@@ -94,6 +94,18 @@
             <input class="form-control" id="form-id" type="hidden" name="formId"/>
             <label for="name">Kode POS</label>
             <input  readonly class="form-control" id="pos" type="text" name="pos" />
+        </div>
+
+        <div class="modal-body">
+            <input class="form-control" id="form-id" type="hidden" name="formId"/>
+            <label for="name">Approval</label>
+            <div></div>
+            <label class="form-check-label" for="approval">
+            <input type="radio" class="form-check-input" id="approval" name="approval" value="1">Approved
+            </label>
+            <label class="form-check-label" for="approval">
+            <input type="radio" class="form-check-input" id="approval" name="approval" value="2">Rejected
+            </label>
         </div>
         
         <div class="modal-footer">

@@ -64,6 +64,8 @@ class PairKeyReq(models.Model):
     status = models.CharField(max_length=10,null=True)        
     bit = models.FloatField(max_length=100,null=True)   
     jenis = models.FloatField(max_length=100,null=True)    
+    privkey = models.TextField(null=True)    
+    pubkey = models.TextField(null=True)    
 
 
 
