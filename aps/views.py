@@ -19,7 +19,7 @@ from .models import mainkey,Profile,PairKeyReq
 import base64
 import datetime
 import hvac
-import mysql.connectord
+import mysql.connector
 import pyautogui
 import pybase64
 import sys
@@ -462,5 +462,5 @@ def listkeyca(request):
 
     return render(request, 'aps/listkeyca.html',createkey)         
 
-    #tes   #tes
+    #tes
 
