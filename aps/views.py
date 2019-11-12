@@ -19,7 +19,7 @@ from .models import mainkey,Profile,PairKeyReq
 import base64
 import datetime
 import hvac
-import mysql.connector
+import mysql.connectord
 import pyautogui
 import pybase64
 import sys
@@ -446,7 +446,6 @@ def keypairca(request):
         cursor.execute(sql1,val)
         db.commit()
 
-
         pyautogui.alert('Generated Key Successfull') 
         return render(request, 'aps/index.html')    
 
@@ -463,4 +462,5 @@ def listkeyca(request):
 
     return render(request, 'aps/listkeyca.html',createkey)         
 
-    #tes
+    #tes   #tes
+
