@@ -15,11 +15,13 @@ cryptography==2.3.1
 dj-database-url==0.5.0
 dj-vault==0.1.6
 Django==2.1.13
+django-bootstrap-modal-forms==1.4.4
 django-dbconn-retry==0.1.5
 django-elasticsearch-dsl==7.0.0
 django-messages==0.6.0
 django-model-utils==3.2.0
 django-tables2==2.1.1
+django-toast-messages==0.1
 django-user-messages==0.6.2
 django-vault-helpers==0.8.1
 # Editable install with no version control (django-x509==0.4.1)
