@@ -10,7 +10,7 @@ STATIC_DIR = os.path.join(BASE_DIR,'static')
 MEDIA_DIR = os.path.join(BASE_DIR,'media')
 SECRET_KEY = 'j0(i0wp82-riqb^@88@5a+^!-*(qq1$01(jchj0k^-8b&g941b'
 DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1:8200','127.0.0.1']
+ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
