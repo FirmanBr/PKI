@@ -462,5 +462,7 @@ def listkeyca(request):
 
     return render(request, 'aps/listkeyca.html',createkey)         
 
-    #testes
+@login_required
+def certifcate(request):
 
+        return render(request, 'aps/certificate.html')    
