@@ -15,7 +15,6 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives import serialization
 from .models import mainkey,Profile,PairKeyReq
 
-
 import base64
 import datetime
 import hvac
@@ -465,4 +464,4 @@ def listkeyca(request):
 @login_required
 def certifcate(request):
 
-        return render(request, 'aps/certificate.html')    
+    return render(request, 'aps/certificate.html')    
