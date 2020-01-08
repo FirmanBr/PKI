@@ -464,6 +464,7 @@ def listkeyca(request):
 @login_required
 def certifcate(request):
 
+    pyautogui.alert('Certificate Created')
     return render(request, 'aps/certificate.html')    
 
 #test
