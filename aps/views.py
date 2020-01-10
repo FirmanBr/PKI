@@ -464,12 +464,14 @@ def listkeyca(request):
 @login_required
 def certifcate(request):
 
-    generate_intermediate_response = client.secrets.pki.generate_intermediate(
-        type='exported',
-        common_name='Vault integration tests'
-    )
+    if request.method == 'POST':
 
-    pyautogui.alert(generate_intermediate_response)
-    return render(request, 'aps/certificate.html')    
+        generate_intermediate_response = client.secrets.pki.generate_intermediate(
+            type='exported',
+            common_name='Vault integration tests'
+        )
+
+    #pyautogui.alert('cek')
+    #return render(request, 'aps/certificate.html')    
 
 #test

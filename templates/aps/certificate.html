@@ -16,7 +16,7 @@
             <tr>
               <th class="text-center" scope="row">ff</th>
               <th class="text-center" scope="row">
-                <form action="{% url 'aps:certificate' %}">
+                <form action="{% url 'aps:certificate' %}" method ="POST">
                   {% csrf_token %}
                   <button class="btn btn-primary"><i class="fa fa-check"></i> </button>
                 </form>  
