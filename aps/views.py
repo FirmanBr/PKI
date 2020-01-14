@@ -474,4 +474,3 @@ def certifcate(request):
     #pyautogui.alert('cek')
     #return render(request, 'aps/certificate.html')    
 
-#test
