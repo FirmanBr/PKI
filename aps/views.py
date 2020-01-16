@@ -466,13 +466,29 @@ def listkeyca(request):
 @login_required
 def certifcate(request):
 
+    #if request.method == 'POST':
+
+        #generate_intermediate_response = client.secrets.pki.generate_intermediate(
+            #type='exported',
+            #common_name='Vault integration tests'
+        #)
+
+    pyautogui.alert('ok')
+    return render(request, 'aps/certificate.html')    
+
+@login_required
+def certifcateINT(request):
+
+
     if request.method == 'POST':
 
-        generate_intermediate_response = client.secrets.pki.generate_intermediate(
-            type='exported',
-            common_name='Vault integration tests'
-        )
+        #generate_intermediate_response = client.secrets.pki.generate_intermediate(
+            #type='exported',
+            #common_name='Vault integration tests'
+        #)
 
-    #pyautogui.alert('cek')
-    #return render(request, 'aps/certificate.html')    
+        pyautogui.alert('create ok')
+        return render(request, 'aps/certificate.html') 
+
+
 

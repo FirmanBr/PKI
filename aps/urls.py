@@ -24,5 +24,5 @@ urlpatterns=[
     url(r'^listkeyca/$',views.listkeyca,name='listkeyca'),    
     url(r'^requestcsca/$',views.requestcsca,name='requestcsca'),
     url(r'^certificate/$',views.certifcate,name='certificate'),
+    url(r'^certifcateINT/$',views.certifcateINT,name='certifcateINT'),
 ]
-
