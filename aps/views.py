@@ -15,7 +15,6 @@ from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives import serialization
 from .models import mainkey,Profile,PairKeyReq
-
 import base64
 import datetime
 import hvac
