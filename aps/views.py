@@ -24,6 +24,7 @@ import pybase64
 import sys
 import time
 
+# Database Connection
 db = mysql.connector.connect(host='localhost',database='pki',user='root',password='')
 key = Fernet.generate_key()
 f = Fernet(key)
